@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Aprender">
+<meta name="theme-color" content="#F6F3EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1013" media="(prefers-color-scheme: dark)">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<title>Aprendizaje Santiago</title>
+<style>
+:root{
+  color-scheme:light dark;
+  --bg:#F6F3EC;--surface:#FFFDF8;--surface2:#EFEBE1;--line:rgba(40,30,10,.10);
+  --text:#1A1A1F;--muted:#6E6A62;--faint:#A8A398;
+  --accent:#1F2A44;--on-accent:#FFFDF8;--gold:#B8893A;--gold-t:#8A6424;--gold-bg:rgba(184,137,58,.13);
+  --ia:#3552F2;--ia-bg:rgba(53,82,242,.10);--ia-t:#3552F2;
+  --fin:#17875F;--fin-bg:rgba(23,135,95,.10);--fin-t:#10704E;
+  --lec:#C8612E;--lec-bg:rgba(200,97,46,.10);--lec-t:#A44B20;
+  --cul:#8E2A4A;--cul-bg:rgba(142,42,74,.10);--cul-t:#8E2A4A;
+  --rev:var(--gold);--rev-bg:var(--gold-bg);--rev-t:var(--gold-t);
+  --ok:#2F7D4F;--warn:#B7791F;--bad:#B3372B;
+  --ok-t:#2A7047;--warn-t:#8A5A12;--bad-t:#B3372B;
+  --h0:#E9E4D8;--h1:#C9CFDF;--h2:#8594BD;--h3:#1F2A44;
+  --on-cover:#FFFDF8;
+  --serif:ui-serif,"New York",Georgia,serif;
+  --sans:-apple-system,"SF Pro Text",system-ui,sans-serif;
+  --r:22px;--shadow:0 1px 2px rgba(40,30,10,.04),0 8px 24px rgba(40,30,10,.06);--bd:transparent;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0F1013;--surface:#17191E;--surface2:#20232A;--line:rgba(255,245,225,.08);
+    --text:#F3EFE6;--muted:#A29D92;--faint:#6B675F;
+    --accent:#E9E2D0;--on-accent:#14161B;--gold:#D9AE5F;--gold-t:#D9AE5F;--gold-bg:rgba(217,174,95,.14);
+    --ia:#7A8FFF;--ia-bg:rgba(122,143,255,.14);--ia-t:#7A8FFF;
+    --fin:#45C995;--fin-bg:rgba(69,201,149,.14);--fin-t:#45C995;
+    --lec:#F0925E;--lec-bg:rgba(240,146,94,.14);--lec-t:#F0925E;
+    --cul:#E0708F;--cul-bg:rgba(224,112,143,.14);--cul-t:#E0708F;
+    --ok:#5CC98A;--warn:#E3A94B;--bad:#EF7A6D;--ok-t:#5CC98A;--warn-t:#E3A94B;--bad-t:#EF7A6D;
+    --h0:#1D2026;--h1:#2E3A5C;--h2:#5068A8;--h3:#9FB2F0;
+    --on-cover:#14161B;
+    --shadow:none;--bd:var(--line);--grain:none;
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text)}
+body{font:16px/1.45 var(--sans);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;overscroll-behavior-y:none;background-image:var(--grain)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0;touch-action:manipulation}
+a{color:inherit}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.serif{font-family:var(--serif);font-variant-numeric:lining-nums}
+#app{max-width:560px;margin:0 auto;min-height:100vh}
+
+/* Encabezado */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(18px);backdrop-filter:saturate(1.4) blur(18px);
+  padding:calc(env(safe-area-inset-top) + 12px) calc(20px + env(safe-area-inset-right)) 12px calc(20px + env(safe-area-inset-left));display:flex;align-items:flex-end;gap:12px}
+.top .kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;min-height:0}
+.top .kicker:empty{display:none}
+.top h1{margin:2px 0 0;font:600 32px/1.1 var(--serif);letter-spacing:-.02em}
+.iconbtn{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--surface);box-shadow:var(--shadow);border:1px solid var(--bd);flex:none}
+.iconbtn svg{width:22px;height:22px}
+.iconbtn[hidden]{display:none}
+
+main{padding:4px calc(20px + env(safe-area-inset-right)) calc(150px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left))}
+.stack>*+*{margin-top:16px}
+.card{background:var(--surface);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);border:1px solid var(--bd)}
+.card h2{margin:0 0 12px;font:600 21px/1.2 var(--serif);letter-spacing:-.01em;display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.card h2 small{font:500 14px var(--sans);color:var(--muted)}
+.card h2 .echip,.card h2 .link{font-family:var(--sans);font-size:13px;letter-spacing:0}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.xs{font-size:13px}
+.row{display:flex;align-items:center;gap:10px}
+.between{justify-content:space-between}
+.wrap{flex-wrap:wrap}
+.grow{flex:1;min-width:0}
+.label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.sect{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:28px 4px 10px}
+.sub{color:var(--muted);font-size:15px;margin-top:-4px}
+.frase{margin:14px 0 0;padding:0 0 0 14px;border-left:2px solid var(--gold);font:italic 18px/1.5 var(--serif);color:var(--text)}
+.frase cite{display:block;font:500 13px var(--sans);font-style:normal;color:var(--muted);margin-top:4px}
+hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
+
+/* Chips y estados */
+.pchip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;background:var(--pbg);color:var(--pt);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.pchip i{width:6px;height:6px;border-radius:50%;background:var(--pc)}
+.echip{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:13px;font-weight:600;white-space:nowrap;background:var(--surface2);color:var(--muted)}
+.echip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.echip.ok{color:var(--ok-t);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.echip.leve{color:var(--warn-t);background:color-mix(in srgb,var(--warn) 14%,transparent)}
+.echip.fuerte{color:var(--bad-t);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.echip.gold{color:var(--gold-t);background:var(--gold-bg)}
+.chip{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:999px;background:var(--surface2);font-size:14px;font-weight:600;white-space:nowrap;color:var(--muted)}
+.chip.on{background:var(--accent);color:var(--on-accent)}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 18px;border-radius:14px;font-weight:600;font-size:17px;background:var(--surface2);transition:transform .12s var(--ease);text-decoration:none}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.ghost{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.danger{background:var(--bad);color:#fff}
+.btn.sm{min-height:42px;font-size:15px;padding:0 14px}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.btn svg{width:20px;height:20px;flex:none}
+.link{color:var(--text);font-weight:600;font-size:14px;padding:8px 0;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:3px}
+.del{width:40px;height:40px;border-radius:12px;color:var(--muted);font-size:22px;display:grid;place-items:center;flex:none}
+
+/* Avisos */
+.alert{border-radius:18px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--bd);box-shadow:var(--shadow)}
+.alert .ic{width:8px;height:8px;border-radius:50%;margin-top:8px;flex:none;background:var(--muted)}
+.alert b{display:block;font-size:15px;font-weight:600}
+.alert p{margin:2px 0 0;font-size:14px;color:var(--muted)}
+.alert .btn{margin-top:10px}
+.alert.acc .ic{background:var(--accent)}
+.alert.gold{background:var(--gold-bg);box-shadow:none}.alert.gold .ic{background:var(--gold)}
+.alert.warn .ic{background:var(--warn)}
+.alert.bad .ic{background:var(--bad)}
+.alert.ok .ic{background:var(--ok)}
+
+/* Anillo */
+.hora{display:flex;flex-direction:column;align-items:center;text-align:center}
+.ringw{position:relative;width:160px;height:160px;margin:4px auto 0}
+.ringw svg{width:160px;height:160px;display:block}
+.ringw .track{stroke:var(--surface2)}
+#ring-rev{transition:stroke-dashoffset .8s var(--ease)}
+.ringw .rc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ringw .rc b{font:600 40px/1 var(--serif);letter-spacing:-.02em}
+.ringw .rc span{font-size:13px;color:var(--muted);margin-top:4px}
+.ringw.full::after{content:"";position:absolute;inset:-6px;border-radius:50%;box-shadow:0 0 0 2px var(--gold),0 0 24px color-mix(in srgb,var(--gold) 45%,transparent);opacity:0;animation:destello 1.6s var(--ease) .5s 1 forwards}
+@keyframes destello{0%{opacity:0;transform:scale(.96)}35%{opacity:1}100%{opacity:.35;transform:scale(1)}}
+.msg{font:italic 17px/1.45 var(--serif);margin:14px 0 0;color:var(--text);max-width:320px}
+.plan{width:100%;margin-top:16px;text-align:left}
+.pi{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.pi .bar{width:4px;align-self:stretch;border-radius:4px;background:var(--pc);flex:none}
+.pi .t{font-weight:500;font-size:15px}
+.pi .s{font-size:13px;color:var(--muted)}
+.pi .ck{width:26px;height:26px;border-radius:50%;flex:none;display:grid;place-items:center;box-shadow:inset 0 0 0 1.75px var(--line)}
+.pi .ck svg{width:15px;height:15px;opacity:0}
+.pi.done .ck{background:var(--pc);box-shadow:none;color:var(--surface)}
+.pi.done .ck svg{opacity:1}
+.tipo{display:flex;align-items:center;gap:8px;justify-content:space-between;width:100%;margin-top:14px}
+.hist{width:100%;margin-top:10px;text-align:left}
+.hrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.hrow .grow{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Tarjeta hero de pilar */
+.hero{border-left:4px solid var(--pc)}
+.hero .big{font:600 36px/1.05 var(--serif);letter-spacing:-.02em;margin:10px 0 4px}
+.hero .big small{font:500 16px var(--sans);color:var(--muted);letter-spacing:0}
+.segbar{display:flex;gap:3px;height:10px;margin:14px 0 10px}
+.segbar i{display:block;height:100%;border-radius:5px;background:var(--pbg);overflow:hidden;min-width:6px}
+.segbar i b{display:block;height:100%;background:var(--pc);border-radius:5px;transition:width .6s var(--ease)}
+.pbar{height:8px;border-radius:8px;background:var(--surface2);overflow:hidden}
+.pbar i{display:block;height:100%;border-radius:8px;background:var(--pc,var(--accent))}
+.acts{display:flex;gap:10px;margin-top:16px}
+.acts .btn{flex:1;padding:0 10px;white-space:nowrap}
+
+/* Libros */
+.book{display:flex;gap:16px;align-items:flex-start}
+.cover{width:76px;aspect-ratio:2/3;border-radius:6px 10px 10px 6px;background:var(--lec);color:var(--on-cover);flex:none;position:relative;padding:10px 8px 8px 12px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:inset 4px 0 0 rgba(0,0,0,.14),0 6px 16px rgba(40,30,10,.12);overflow:hidden}
+.cover .ct{font:600 11px/1.15 var(--serif);letter-spacing:-.01em}
+.cover .ca{font:600 10px var(--sans);letter-spacing:.1em;opacity:.8}
+.cover.bonus{background:color-mix(in srgb,var(--lec) 55%,var(--gold))}
+.cover.lg{width:150px;padding:18px 14px 14px 20px}
+.cover.lg .ct{font-size:20px}
+.cover.lg .ca{font-size:13px}
+.cover.ia{background:var(--ia)}
+.book h3{margin:0;font:600 20px/1.2 var(--serif)}
+.book .au{font-size:14px;color:var(--muted);margin:2px 0 10px}
+
+/* Listas */
+.li{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.li:first-child{border-top:0}
+.li .t{font-weight:500}
+.li .s{font-size:13px;color:var(--muted)}
+.n{width:32px;height:32px;border-radius:10px;background:var(--surface2);display:grid;place-items:center;font-weight:600;font-size:14px;flex:none}
+.chk{width:30px;height:30px;border-radius:50%;flex:none;display:grid;place-items:center;box-shadow:inset 0 0 0 1.75px var(--faint);transition:all .2s var(--ease);color:var(--surface)}
+.chk svg{width:17px;height:17px;opacity:0}
+.on>.chk,.chk.on{background:var(--pc,var(--accent));box-shadow:none}
+.on>.chk svg,.chk.on svg{opacity:1}
+.cl{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:6px 0;text-align:left;border-top:1px solid var(--line);font-size:15px}
+.cl:first-child{border-top:0}
+.cl.on .tx{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--faint)}
+.menu{display:flex;align-items:center;gap:14px;width:100%;min-height:60px;text-align:left;border-top:1px solid var(--line);padding:8px 0}
+.menu:first-child{border-top:0}
+.menu svg.ico{width:24px;height:24px;flex:none;color:var(--text)}
+.menu .t{font-weight:500}
+.menu .s{font-size:13px;color:var(--muted)}
+.menu .chev{color:var(--faint);font-size:22px}
+
+/* Segmentos */
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;background:var(--surface2);border-radius:14px;padding:3px;gap:3px}
+.seg button{min-height:38px;border-radius:11px;font-size:14px;font-weight:600;color:var(--muted)}
+.seg button.on{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+.hscroll{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:0 20px}
+.hscroll::-webkit-scrollbar{display:none}
+
+/* Racha */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{background:var(--surface);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);border:1px solid var(--bd)}
+.stat .v{font:600 44px/1 var(--serif);letter-spacing:-.02em}
+.stat .u{font-size:14px;color:var(--muted);margin-top:4px}
+.stat.gold .v{color:var(--gold-t)}
+.heat{display:grid;gap:3px}
+.hc{aspect-ratio:1;border-radius:3px;background:var(--h0);position:relative}
+.hc.l1{background:var(--h1)}.hc.l2{background:var(--h2)}.hc.l3{background:var(--h3)}
+.hc.gd::after{content:"";position:absolute;width:34%;height:34%;border-radius:50%;background:var(--gold);right:10%;top:10%}
+.hc.fut{opacity:.45}
+.hc.out{background:transparent}
+.hc.today{outline:1.75px solid var(--text);outline-offset:1px}
+.hl{font-size:10px;color:var(--muted);font-weight:600;line-height:1;align-self:center;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.wkd{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:end;height:92px;margin-top:6px}
+.wkd div{display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end;font-size:11px;color:var(--muted);font-weight:600}
+.wkd i{display:block;width:100%;max-width:26px;border-radius:5px;background:var(--h2);min-height:3px}
+.wkd i.ok{background:var(--h3)}
+.wkd i.z{background:var(--h0)}
+
+/* Datos para platicar */
+.dato{position:relative;padding:22px 20px 16px 20px}
+.dato .q{position:absolute;top:2px;left:14px;font:600 54px/1 var(--serif);color:var(--pc);opacity:.9}
+.dato p{margin:14px 0 10px;font:italic 18px/1.5 var(--serif)}
+.dato .ft{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;color:var(--muted)}
+.repaso{position:fixed;inset:0;z-index:70;background:var(--bg);background-image:var(--grain);display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 14px) calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));animation:fade .2s}
+.repaso .top2{display:flex;align-items:center;justify-content:space-between}
+.flipw{flex:1;perspective:1400px;margin:18px 0;display:flex}
+.flip{position:relative;flex:1;transform-style:preserve-3d;transition:transform .5s var(--ease)}
+.flip.v{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);border-radius:28px;box-shadow:var(--shadow);border:1px solid var(--bd);padding:28px 24px;display:flex;flex-direction:column;justify-content:center}
+.face.back{transform:rotateY(180deg)}
+.face .q{font:600 80px/1 var(--serif);color:var(--pc);height:48px}
+.face .tx{font:italic 23px/1.45 var(--serif);margin:10px 0 0}
+.face .hint{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-size:13px;color:var(--muted)}
+.rep-acts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rep-acts .btn{font-size:16px;padding:0 10px;white-space:nowrap}
+
+/* Gráficas */
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .axis{fill:var(--muted);font-size:10px;font-weight:600;font-family:var(--sans)}
+.empty{padding:26px 10px;text-align:center;color:var(--muted);font-size:14px}
+
+/* Checkpoints */
+.cp{border-left:4px solid transparent}
+.cp.next{border-left-color:var(--accent)}
+.cp.logrado{border-left-color:var(--gold)}
+.cp .date{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.cp .ttl{font:600 20px/1.2 var(--serif);margin-top:2px}
+.mt{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.mt:first-of-type{border-top:0}
+.mt .dot{width:8px;height:8px;border-radius:50%;background:var(--pc);flex:none}
+.mt .t{flex:1;font-size:14px;min-width:0}
+.mt .t small{display:block;color:var(--muted);font-size:12px}
+.rec{margin-top:10px;border-radius:14px;padding:12px 14px;font-size:14px;background:var(--surface2)}
+.rec b{display:block;margin-bottom:2px}
+.rec.bad{background:color-mix(in srgb,var(--bad) 10%,var(--surface))}
+.rec.warn{background:color-mix(in srgb,var(--warn) 12%,var(--surface))}
+.rec.ok{background:color-mix(in srgb,var(--ok) 10%,var(--surface))}
+details.dt{border-top:1px solid var(--line);padding:12px 0}
+details.dt:first-of-type{border-top:0}
+details.dt summary{font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:32px}
+details.dt summary::-webkit-details-marker{display:none}
+details.dt summary::after{content:"+";font-size:20px;color:var(--muted)}
+details.dt[open] summary::after{content:"–"}
+
+/* Barra de pestañas */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:color-mix(in srgb,var(--surface) 86%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(20px);backdrop-filter:saturate(1.4) blur(20px);border-top:1px solid var(--line);
+  padding:6px calc(8px + env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) calc(8px + env(safe-area-inset-left))}
+.tabs .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;min-height:52px;justify-content:center;font-size:11px;font-weight:600;color:var(--muted)}
+.tab svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.tab.on{color:var(--accent)}
+.tab.on svg{fill:currentColor;fill-opacity:.16}
+.fab{position:fixed;z-index:31;right:calc(20px + env(safe-area-inset-right));bottom:calc(80px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;box-shadow:0 8px 24px rgba(20,20,40,.22);transition:transform .2s var(--ease)}
+.fab:active{transform:scale(.92)}
+.fab svg{width:26px;height:26px}
+@media (min-width:600px){.fab{right:calc(50% - 260px)}}
+
+/* Hoja inferior */
+.backdrop{position:fixed;inset:0;background:rgba(10,10,20,.42);z-index:50;animation:fade .2s}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:51;max-width:560px;margin:0 auto;background:var(--bg);background-image:var(--grain);border-radius:26px 26px 0 0;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:10px calc(20px + env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));animation:up .26s var(--ease)}
+.sheet .grab{width:40px;height:5px;border-radius:3px;background:var(--faint);margin:0 auto 14px}
+.sheet h2{font:600 26px/1.15 var(--serif);margin:0 0 6px;letter-spacing:-.02em}
+@keyframes up{from{transform:translateY(48px);opacity:0}}
+@keyframes fade{from{opacity:0}}
+.field{display:block;margin-top:14px}
+.field>span{display:block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
+.input{width:100%;min-height:52px;border-radius:12px;border:0;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);padding:0 14px;font-size:17px;-webkit-appearance:none;appearance:none}
+textarea.input{padding:12px 14px;min-height:92px;line-height:1.4;resize:vertical}
+select.input{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat;padding-right:36px}
+.input:focus{outline:none;box-shadow:inset 0 0 0 2px var(--accent)}
+.input.err{box-shadow:inset 0 0 0 2px var(--bad)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.pbtn{min-height:64px;border-radius:16px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:600;color:var(--pt)}
+.pbtn i{width:10px;height:10px;border-radius:50%;background:var(--pc)}
+.pbtn.on{background:var(--pbg);box-shadow:inset 0 0 0 2px var(--pc)}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mbtn{min-height:52px;border-radius:14px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);font-weight:600;font-size:17px}
+.mbtn small{font-size:12px;font-weight:500;color:var(--muted);margin-left:2px}
+.mbtn.on{background:var(--accent);color:var(--on-accent);box-shadow:none}
+.mbtn.on small{color:inherit;opacity:.75}
+.fs{background:var(--surface);border-radius:18px;padding:4px 16px 16px;margin-top:14px;border:1px solid var(--bd)}
+.edday{background:var(--surface);border-radius:16px;padding:12px 14px;margin-top:10px;border:1px solid var(--bd)}
+.edrow{display:grid;grid-template-columns:96px 64px 1fr 36px;gap:6px;margin-top:8px;align-items:center}
+.edrow .input{min-height:44px;font-size:16px;padding:0 10px}
+.edrow select.input{padding-right:24px;background-position:calc(100% - 14px) 50%,calc(100% - 9px) 50%}
+
+/* Toast, confeti, logro */
+.toast{position:fixed;left:50%;bottom:calc(150px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(16px);background:var(--accent);color:var(--on-accent);padding:12px 18px;border-radius:14px;font-weight:600;font-size:15px;z-index:80;opacity:0;transition:all .24s var(--ease);pointer-events:none;max-width:calc(100% - 40px);display:flex;align-items:center;gap:10px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast svg{width:20px;height:20px;flex:none}
+.toast svg path{stroke-dasharray:24;stroke-dashoffset:24;animation:draw .45s var(--ease) .1s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.confeti{position:fixed;inset:0;pointer-events:none;z-index:90;overflow:hidden}
+.confeti i{position:absolute;left:50%;top:38%;width:7px;height:11px;border-radius:2px;opacity:0;animation:conf 1.05s var(--ease) forwards}
+@keyframes conf{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--r))}}
+.logro{position:fixed;inset:0;z-index:95;background:var(--bg);background-image:var(--grain);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 28px calc(40px + env(safe-area-inset-bottom));animation:fade .3s}
+.logro h2{font:600 40px/1.08 var(--serif);letter-spacing:-.02em;margin:26px 0 6px}
+.logro .k{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-t)}
+.logro p{color:var(--muted);margin:6px 0 28px;max-width:320px}
+.debug{position:fixed;top:calc(env(safe-area-inset-top) + 2px);left:50%;transform:translateX(-50%);z-index:40;background:var(--bad);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .ringw.full::after{opacity:.35}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <button class="iconbtn" id="back" data-action="atras" aria-label="Regresar" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg>
+    </button>
+    <div class="grow"><div class="kicker" id="kicker"></div><h1 id="titulo">Hoy</h1></div>
+  </header>
+  <main id="view" class="stack"></main>
+</div>
+<button class="fab" id="fab" data-action="registrar" aria-label="Registrar sesión">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+</button>
+<nav class="tabs" aria-label="Secciones"><div class="in" id="tabs"></div></nav>
+<div id="modal"></div>
+<div id="overlay"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<noscript><p style="padding:20px">Esta app necesita JavaScript.</p></noscript>
+
+<script>
+'use strict';
+/* =====================================================================
+   CONFIGURACIÓN — todo el plan vive aquí. Fuente: 01_contexto_plan_aprendizaje.md
+   Lo que Santiago edita desde la app se guarda aparte (clave "ajustes").
+   ===================================================================== */
+const CONFIG = {
+  zonaHoraria: 'America/Mexico_City',
+  inicio: '2026-09-28',
+  fin: '2026-12-31',
+  sprintFin: '2026-10-11',
+  semanaTec: { inicio: '2026-10-26', fin: '2026-10-30' },
+  metaDiaria: 60,
+  parcial: 30,
+
+  curso: {
+    titulo: 'Claude Code 2026: curso completo en español',
+    url: 'https://www.youtube.com/watch?v=h49d1-d_fYk',
+    duracion: 360,                 // minutos de video (6:00)
+    avance: 135 + 17 / 60,         // 2:15:17 al 27 sep
+    fechaAvance: '2026-09-27',
+    factorReal: 1.5,               // minutos reales por minuto de video
+    metaFinal: '2026-10-09',
+    colchon: '2026-10-11',
+    bloques: [
+      { hasta: 180, fecha: '2026-09-29' },
+      { hasta: 225, fecha: '2026-10-01' },
+      { hasta: 270, fecha: '2026-10-05' },
+      { hasta: 315, fecha: '2026-10-07' },
+      { hasta: 360, fecha: '2026-10-09' },
+    ],
+  },
+
+  libros: [
+    { id: 'poderes', titulo: 'Los 11 poderes del líder', autor: 'Jorge Valdano', paginas: 185, inicio: '2026-09-28', meta: '2026-10-31', orden: 1 },
+    { id: 'bonus', titulo: 'Libro corto de liderazgo', autor: 'Por definir', paginas: 77, inicio: '2026-10-26', meta: '2026-10-30', bonus: true },
+    { id: 'dispenza', titulo: 'Deja de ser tú', autor: 'Joe Dispenza', paginas: 350, inicio: '2026-11-02', meta: '2026-12-31', orden: 2 },
+  ],
+
+  finanzas: [
+    { n: 1, nombre: 'Finanzas personales', detalle: 'Presupuesto, ahorro, fondo de emergencia e interés compuesto.', meta: '2026-10-11' },
+    { n: 2, nombre: 'Inversión básica en México', detalle: 'CETES, fondos, ETFs, S&P 500 y plataformas (GBM, Cetesdirecto).', meta: '2026-10-25' },
+    { n: 3, nombre: 'Estados financieros', detalle: 'Estado de resultados, balance y flujo de efectivo.', meta: '2026-11-08' },
+    { n: 4, nombre: 'Métricas de startups', detalle: 'Unit economics, CAC, LTV, burn rate, runway y valuación.', meta: '2026-11-22' },
+    { n: 5, nombre: 'Economía para platicar', detalle: 'Inflación, tasas de Banxico, tipo de cambio y recesión.', meta: '2026-12-06' },
+    { n: 6, nombre: 'Mercados', detalle: 'Cómo se mueve la bolsa, cripto (qué sí y qué no), riesgo y diversificación.', meta: '2026-12-20' },
+  ],
+
+  cultura: [
+    { id: 'vino', nombre: 'Vino', titulo: 'Quincena del vino', inicio: '2026-09-28', fin: '2026-10-11',
+      platicar: 'Uvas principales, regiones clave, Valle de Guadalupe, cómo catar y maridajes básicos.',
+      checklist: ['Uvas: Cabernet, Malbec, Pinot Noir, Chardonnay, Sauvignon Blanc', 'Regiones clave del mundo', 'Valle de Guadalupe', 'Cómo catar un vino', 'Maridajes básicos'] },
+    { id: 'golf', nombre: 'Golf', titulo: 'Quincena del golf', inicio: '2026-10-12', fin: '2026-10-25',
+      platicar: 'Reglas básicas, par/birdie/bogey, handicap, los 4 majors, jugadores y etiqueta en el campo.',
+      checklist: ['Reglas básicas y etiqueta en el campo', 'Par, birdie y bogey', 'Qué es el handicap', 'Los 4 majors', 'Jugadores actuales y leyendas'] },
+    { id: 'carnes', nombre: 'Carnes', titulo: 'Quincena de las carnes', inicio: '2026-10-26', fin: '2026-11-08',
+      platicar: 'Cortes, términos, maduración, Wagyu/Angus y técnicas de asado.',
+      checklist: ['Cortes: rib eye, New York, tomahawk, picaña, arrachera', 'Términos de cocción', 'Maduración: dry aged y wet aged', 'Wagyu vs Angus', 'Técnicas de asado'] },
+    { id: 'negocios', nombre: 'Negocios', titulo: 'Quincena de los negocios', inicio: '2026-11-09', fin: '2026-11-22',
+      platicar: 'Grandes empresas y fundadores, casos famosos, modelos de negocio y noticias.',
+      checklist: ['Grandes empresas y sus fundadores', 'Casos de éxito famosos', 'Fracasos famosos y por qué', 'Modelos de negocio', 'Noticias de negocios de la semana'] },
+    { id: 'politica', nombre: 'Política', titulo: 'Quincena de la política', inicio: '2026-11-23', fin: '2026-12-06',
+      platicar: 'Sistema político de México, poderes y elecciones, geopolítica y cómo hablar del tema con respeto.',
+      checklist: ['Sistema político de México', 'Los tres poderes y cómo funcionan', 'Elecciones: cómo y cuándo', 'Geopolítica actual', 'Hablar de política con respeto y datos'] },
+    { id: 'cafe', nombre: 'Café', titulo: 'Quincena del café', inicio: '2026-12-07', fin: '2026-12-20',
+      platicar: 'Orígenes, arábica vs robusta, tuestes y métodos.',
+      checklist: ['Orígenes: México, Colombia, Etiopía', 'Arábica vs robusta', 'Tipos de tueste', 'Métodos: espresso, V60, prensa francesa', 'Cómo describir un café: acidez, cuerpo, notas'] },
+    { id: 'repaso', nombre: 'Repaso libre', titulo: 'Repaso libre', inicio: '2026-12-21', fin: '2026-12-31',
+      platicar: 'Repasar los datos para platicar de todo el trimestre.',
+      checklist: ['Repasar datos de vino', 'Repasar datos de golf', 'Repasar datos de carnes', 'Repasar negocios y política', 'Repasar datos de café'] },
+  ],
+
+  // Semana tipo. p: ia | fin | lec | cul | rev (revisión). {libro} {cultura} {finanzas} se llenan solos.
+  semanas: {
+    sprint: { nombre: 'Sprint del curso', rango: '28 sep – 11 oct', dias: [
+      { tipo: 'estructurado', items: [{ p: 'ia', min: 60, t: 'Curso de Claude Code' }] },
+      { tipo: 'estructurado', items: [{ p: 'ia', min: 60, t: 'Curso de Claude Code' }] },
+      { tipo: 'estructurado', items: [{ p: 'ia', min: 60, t: 'Curso de Claude Code' }] },
+      { tipo: 'estructurado', items: [{ p: 'ia', min: 60, t: 'Curso de Claude Code' }] },
+      { tipo: 'estructurado', items: [{ p: 'ia', min: 60, t: 'Curso de Claude Code' }] },
+      { tipo: 'libre', items: [{ p: 'lec', min: 60, t: 'Lectura: {libro}' }] },
+      { tipo: 'libre', items: [{ p: 'cul', min: 30, t: 'Cultura: {cultura}' }, { p: 'fin', min: 15, t: 'Finanzas: {finanzas}' }, { p: 'rev', min: 15, t: 'Revisión semanal' }] },
+    ] },
+    normal: { nombre: 'Semana normal', rango: '12 oct – 31 dic', dias: [
+      { tipo: 'estructurado', items: [{ p: 'ia', min: 60, t: 'IA: aplica lo del curso a un proyecto propio' }] },
+      { tipo: 'estructurado', items: [{ p: 'fin', min: 45, t: 'Finanzas: {finanzas}' }, { p: 'lec', min: 15, t: 'Lectura: {libro}' }] },
+      { tipo: 'estructurado', items: [{ p: 'lec', min: 60, t: 'Lectura: {libro}' }] },
+      { tipo: 'estructurado', items: [{ p: 'cul', min: 45, t: 'Cultura: {cultura}' }, { p: 'lec', min: 15, t: 'Lectura: {libro}' }] },
+      { tipo: 'estructurado', items: [{ p: 'ia', min: 60, t: 'IA: nuevo recurso, herramienta o práctica' }] },
+      { tipo: 'libre', items: [{ p: 'lec', min: 45, t: 'Lectura: {libro}' }, { p: 'cul', min: 15, t: 'Cultura ligera: podcast o video (funciona en Valle)' }] },
+      { tipo: 'libre', items: [{ p: 'fin', min: 45, t: 'Finanzas: {finanzas}' }, { p: 'rev', min: 15, t: 'Revisión semanal' }] },
+    ] },
+  },
+
+  // Checkpoints cada 2 semanas. tipo: curso | libro | fin | cul | manual | libros2 | culTodos
+  checkpoints: [
+    { fecha: '2026-10-11', metas: [
+      { p: 'ia', tipo: 'curso', txt: 'Curso de Claude Code 100% terminado' },
+      { p: 'lec', tipo: 'libro', libro: 'poderes', pct: 45, txt: '11 poderes ≥ 45% (≈85 p.)' },
+      { p: 'fin', tipo: 'fin', n: 1, txt: 'Tema 1 de finanzas hecho' },
+      { p: 'cul', tipo: 'cul', id: 'vino', txt: 'Checklist de vino completa' } ] },
+    { fecha: '2026-10-25', metas: [
+      { p: 'ia', tipo: 'manual', key: 'proyecto', txt: '1 proyecto propio usando lo aprendido' },
+      { p: 'lec', tipo: 'libro', libro: 'poderes', pct: 90, txt: '11 poderes ≥ 90%' },
+      { p: 'fin', tipo: 'fin', n: 2, txt: 'Tema 2 de finanzas hecho' },
+      { p: 'cul', tipo: 'cul', id: 'golf', txt: 'Checklist de golf completa' } ] },
+    { fecha: '2026-11-08', metas: [
+      { p: 'lec', tipo: 'libro', libro: 'poderes', pct: 100, txt: '11 poderes terminado' },
+      { p: 'lec', tipo: 'libro', libro: 'bonus', pct: 100, opcional: true, txt: 'Bonus de 77 p. (si se pudo)' },
+      { p: 'lec', tipo: 'libro', libro: 'dispenza', pct: 12, txt: 'Deja de ser tú ≥ 12%' },
+      { p: 'fin', tipo: 'fin', n: 3, txt: 'Tema 3 de finanzas hecho' },
+      { p: 'cul', tipo: 'cul', id: 'carnes', txt: 'Checklist de carnes completa' } ] },
+    { fecha: '2026-11-22', metas: [
+      { p: 'lec', tipo: 'libro', libro: 'dispenza', pct: 35, txt: 'Deja de ser tú ≥ 35%' },
+      { p: 'fin', tipo: 'fin', n: 4, txt: 'Tema 4 de finanzas hecho' },
+      { p: 'cul', tipo: 'cul', id: 'negocios', txt: 'Checklist de negocios completa' } ] },
+    { fecha: '2026-12-06', metas: [
+      { p: 'lec', tipo: 'libro', libro: 'dispenza', pct: 60, txt: 'Deja de ser tú ≥ 60%' },
+      { p: 'fin', tipo: 'fin', n: 5, txt: 'Tema 5 de finanzas hecho' },
+      { p: 'cul', tipo: 'cul', id: 'politica', txt: 'Checklist de política completa' } ] },
+    { fecha: '2026-12-20', metas: [
+      { p: 'lec', tipo: 'libro', libro: 'dispenza', pct: 85, txt: 'Deja de ser tú ≥ 85%' },
+      { p: 'fin', tipo: 'fin', n: 6, txt: 'Tema 6 de finanzas hecho' },
+      { p: 'cul', tipo: 'cul', id: 'cafe', txt: 'Checklist de café completa' } ] },
+    { fecha: '2026-12-31', metas: [
+      { p: 'lec', tipo: 'libros2', txt: '2 libros terminados' },
+      { p: 'fin', tipo: 'finTodos', txt: 'Los 6 temas de finanzas' },
+      { p: 'cul', tipo: 'culTodos', txt: '6 temas de cultura + repaso' } ] },
+  ],
+
+  reglas: {
+    curso: { titulo: 'El curso va atrasado más de 1 bloque', texto: 'Este sábado y domingo se vuelven de curso hasta que alcances la línea. Ya ajusté tu plan.' },
+    lectura: { titulo: 'La lectura va atrasada más de 20 páginas', texto: 'Sube la lectura del martes y jueves a 30 min. Ya ajusté tu plan.' },
+    dias: { titulo: 'La semana pasada cumpliste {n} de 7 días', texto: 'La meta sigue siendo una hora, pero esta semana 30 min también cuentan para tu racha. Lo importante es no romper el hábito.' },
+    adelantado: { titulo: 'Terminaste el curso antes del 9 oct', texto: 'Usa esos días para adelantar lectura y cultura. Ya ajusté lo que queda del sprint.' },
+  },
+
+  // Frases de respaldo mientras no guardes frases de tus libros.
+  frases: [
+    'Una hora al día durante un trimestre son más de 90 horas. Eso ya es otra persona.',
+    'No se trata de saber de todo, sino de poder platicar de casi todo.',
+    'Lo que escribes con tus palabras es lo que se te queda.',
+    'Un día flojo no rompe nada. Dos seguidos ya son costumbre: retoma hoy.',
+    'La conversación buena empieza con una buena pregunta y un dato bien contado.',
+    'Lee despacio lo que te mueve y rápido lo que solo te informa.',
+  ],
+};
+
+/* =====================================================================
+   STORAGE — única puerta a los datos. Etapa 2: cambiar `backend`
+   por @capacitor/preferences (init ya es async, el resto no cambia).
+   ===================================================================== */
+const storage = (() => {
+  const PREFIX = 'aprendizaje:';
+  let cache = {}, ver = 0, ls = null;
+  try { ls = window.localStorage; ls.setItem(PREFIX + '__t', '1'); ls.removeItem(PREFIX + '__t'); } catch (e) { ls = null; }
+  const backend = {
+    async load() {
+      const out = {};
+      if (!ls) return out;
+      for (let i = 0; i < ls.length; i++) {
+        const k = ls.key(i);
+        if (k && k.startsWith(PREFIX)) { try { out[k.slice(PREFIX.length)] = JSON.parse(ls.getItem(k)); } catch (e) {} }
+      }
+      return out;
+    },
+    write(k, v) { if (!ls) return true; try { ls.setItem(PREFIX + k, JSON.stringify(v)); return true; } catch (e) { console.warn('No se pudo guardar', e); return false; } },
+    del(k) { if (ls) ls.removeItem(PREFIX + k); },
+  };
+  return {
+    async init() { cache = await backend.load(); ver++; },
+    get(k, def) { return k in cache ? cache[k] : def; },
+    set(k, v) { cache[k] = v; ver++; return backend.write(k, v); },
+    remove(k) { delete cache[k]; ver++; backend.del(k); },
+    clear() { Object.keys(cache).forEach(k => backend.del(k)); cache = {}; ver++; },
+    exportAll() { return { app: 'aprendizaje-santiago', version: 1, exportado: new Date().toISOString(), datos: JSON.parse(JSON.stringify(cache)) }; },
+    importAll(obj) {
+      if (!obj || obj.app !== 'aprendizaje-santiago' || typeof obj.datos !== 'object') throw new Error('Este archivo no es un respaldo de la app.');
+      this.clear();
+      Object.entries(obj.datos).forEach(([k, v]) => this.set(k, v));
+    },
+    ready: () => !!ls,
+    ver: () => ver,
+  };
+})();
+
+/* =====================================================================
+   FECHAS (todo en America/Mexico_City, claves YYYY-MM-DD)
+   ===================================================================== */
+const MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+const MESES_L = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const DIAS = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+const DIAS_C = ['lun','mar','mié','jue','vie','sáb','dom'];
+const DIAS_1 = ['L','M','M','J','V','S','D'];
+
+const fechaDebug = (() => { const f = new URLSearchParams(location.search).get('fecha'); return /^\d{4}-\d{2}-\d{2}$/.test(f || '') ? f : null; })();
+function hoyReal() { return new Intl.DateTimeFormat('en-CA', { timeZone: CONFIG.zonaHoraria, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); }
+function hoy() { return fechaDebug || hoyReal(); }
+function horaMX() { return +new Intl.DateTimeFormat('en-US', { timeZone: CONFIG.zonaHoraria, hour: 'numeric', hourCycle: 'h23' }).format(new Date()) % 24; }
+const D = s => new Date(s + 'T12:00:00Z');
+const toISO = x => x.toISOString().slice(0, 10);
+function addDays(s, n) { const x = D(s); x.setUTCDate(x.getUTCDate() + n); return toISO(x); }
+function diff(a, b) { return Math.round((D(b) - D(a)) / 86400000); }
+function dow(s) { return (D(s).getUTCDay() + 6) % 7; }
+function lunesDe(s) { return addDays(s, -dow(s)); }
+function fCorta(s) { const x = D(s); return `${DIAS_C[dow(s)]} ${x.getUTCDate()} ${MESES[x.getUTCMonth()]}`; }
+function fDia(s) { const x = D(s); return `${x.getUTCDate()} ${MESES[x.getUTCMonth()]}`; }
+function fLarga(s) { const x = D(s); return `${DIAS[dow(s)]} ${x.getUTCDate()} de ${MESES_L[x.getUTCMonth()]}`; }
+
+/* ---------- Formatos ---------- */
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const clone = o => JSON.parse(JSON.stringify(o));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+function fHM(min) { const t = Math.round(min); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`; }
+function fDur(min) { const t = Math.round(min), h = Math.floor(t / 60), m = t % 60; return h ? (m ? `${h} h ${m} min` : `${h} h`) : `${m} min`; }
+// "3:12" → 192 · "2:15:17" → 135.28 · "95" → 95 min
+function parseHM(s) {
+  s = String(s || '').trim().replace(/\s*h\s*/i, ':').replace(/[.,]/g, ':').replace(/:$/, '');
+  if (!s) return null;
+  const p = s.split(':');
+  if (p.some(x => !/^\d+$/.test(x))) return null;
+  const n = p.map(Number);
+  if (n.length === 1) return n[0];
+  if (n[1] > 59 || (n.length === 3 && n[2] > 59) || n.length > 3) return null;
+  return n[0] * 60 + n[1] + (n.length === 3 ? n[2] / 60 : 0);
+}
+const pl = (n, uno, varios) => `${n} ${n === 1 ? uno : varios}`;
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+/* =====================================================================
+   AJUSTES (lo editable del plan, encima de CONFIG)
+   ===================================================================== */
+const ajustes = () => storage.get('ajustes', {});
+function setAjuste(ruta, valor) {
+  const a = clone(ajustes()); let o = a;
+  ruta.slice(0, -1).forEach(k => { o[k] = o[k] || {}; o = o[k]; });
+  if (valor === undefined) delete o[ruta[ruta.length - 1]]; else o[ruta[ruta.length - 1]] = valor;
+  storage.set('ajustes', a);
+}
+function curso() {
+  const aj = ajustes().curso || {}, c = { ...CONFIG.curso, ...aj };
+  const fechas = aj.fechas || CONFIG.curso.bloques.map(b => b.fecha);
+  const n = CONFIG.curso.bloques.length;
+  c.bloques = CONFIG.curso.bloques.map((b, i) => ({ n: i + 1, hasta: i === n - 1 ? c.duracion : Math.min(b.hasta, c.duracion), fecha: fechas[i] || b.fecha }));
+  c.bloques.forEach((b, i) => { b.desde = i ? c.bloques[i - 1].hasta : c.avance; });
+  c.metaFinal = c.bloques[n - 1].fecha;
+  c.capitulos = aj.capitulos || [];
+  return c;
+}
+function libros() { const aj = ajustes().libros || {}; return CONFIG.libros.map(b => ({ inicial: 0, ...b, ...(aj[b.id] || {}) })); }
+const libro = id => libros().find(b => b.id === id);
+function periodos() { const aj = ajustes().cultura || {}; return CONFIG.cultura.map(p => ({ ...p, ...(aj[p.id] || {}) })); }
+const extrasCultura = () => (ajustes().extras || []).map(x => ({ ...x, extra: true }));
+const temasCultura = () => [...periodos(), ...extrasCultura()];
+const temaCultura = id => temasCultura().find(t => t.id === id);
+function periodoDe(f) { const ps = periodos(); return ps.find(p => f >= p.inicio && f <= p.fin) || (f < ps[0].inicio ? ps[0] : ps[ps.length - 1]); }
+function semana(id) { const ed = (ajustes().semanas || {})[id]; return { ...CONFIG.semanas[id], dias: ed || CONFIG.semanas[id].dias }; }
+const semanaEditada = id => !!(ajustes().semanas || {})[id];
+
+/* =====================================================================
+   REGISTROS
+   ===================================================================== */
+const sesiones = () => storage.get('sesiones', []);
+const ordenadas = () => sesiones().slice().sort((a, b) => a.fecha.localeCompare(b.fecha) || a.ts - b.ts);
+const P4 = ['ia', 'fin', 'lec', 'cul'];
+const PN = { ia: 'IA', fin: 'Finanzas', lec: 'Lectura', cul: 'Cultura', rev: 'Revisión' };
+let _md = null, _mdv = -1;
+function mapaDias() {
+  if (_mdv === storage.ver()) return _md;
+  const m = {};
+  sesiones().forEach(s => { const d = m[s.fecha] || (m[s.fecha] = { total: 0, ia: 0, fin: 0, lec: 0, cul: 0, rev: 0 }); d.total += s.min; d[s.p] += s.min; });
+  _md = m; _mdv = storage.ver(); return m;
+}
+const diaVacio = () => ({ total: 0, ia: 0, fin: 0, lec: 0, cul: 0, rev: 0 });
+const minDia = f => (mapaDias()[f] || diaVacio()).total;
+
+/* =====================================================================
+   MOTOR DEL PLAN
+   ===================================================================== */
+/* ---------- Curso ---------- */
+function minutoCurso() { const c = curso(); const s = ordenadas().filter(x => x.p === 'ia' && x.video != null).pop(); return s ? s.video : c.avance; }
+function cursoFin() { const c = curso(); const s = ordenadas().find(x => x.p === 'ia' && x.video != null && x.video >= c.duracion - 0.5); return s ? s.fecha : null; }
+const cursoListoEn = f => { const cf = cursoFin(); return !!cf && cf < f; };
+function idealCurso(f) {
+  const c = curso(), pts = [{ x: c.fechaAvance, y: c.avance }, ...c.bloques.map(b => ({ x: b.fecha, y: b.hasta }))];
+  if (f <= pts[0].x) return pts[0].y;
+  for (let i = 1; i < pts.length; i++) {
+    if (f <= pts[i].x) { const a = pts[i - 1], b = pts[i]; return a.y + (b.y - a.y) * diff(a.x, f) / Math.max(1, diff(a.x, b.x)); }
+  }
+  return c.duracion;
+}
+function bloqueActual() { const c = curso(), a = minutoCurso(); return c.bloques.find(b => b.hasta > a + 0.5) || c.bloques[c.bloques.length - 1]; }
+function estadoCurso() {
+  const H = hoy(), a = minutoCurso(), c = curso();
+  if (cursoFin()) return { nivel: 'ok', txt: 'Terminado', d: 0 };
+  const esperado = idealCurso(addDays(H, -1)), idealHoy = idealCurso(H), d = a - esperado;
+  if (a >= idealHoy + 5 && H >= CONFIG.inicio) return { nivel: 'ok', txt: `Adelantado ${fDur(a - idealHoy)}`, d };
+  if (d >= -3) return { nivel: 'ok', txt: 'En tiempo', d };
+  if (d >= -45) return { nivel: 'leve', txt: `Atrasado ${fDur(-d)}`, d };
+  return { nivel: 'fuerte', txt: `Atrasado ${fDur(-d)}`, d };
+}
+
+/* ---------- Libros ---------- */
+function paginaDe(id) { const s = ordenadas().filter(x => x.p === 'lec' && x.libro === id && x.pagina != null).pop(); return s ? s.pagina : libro(id).inicial; }
+function libroFin(id) { const b = libro(id); const s = ordenadas().find(x => x.p === 'lec' && x.libro === id && x.pagina >= b.paginas); return s ? s.fecha : null; }
+function idealLibro(b, f) {
+  const x0 = addDays(b.inicio, -1);
+  if (f <= x0) return b.inicial;
+  if (f >= b.meta) return b.paginas;
+  return b.inicial + (b.paginas - b.inicial) * diff(x0, f) / diff(x0, b.meta);
+}
+function estadoLibro(b, H = hoy()) {
+  const p = paginaDe(b.id);
+  if (p >= b.paginas) return { nivel: 'ok', txt: 'Terminado', atraso: 0 };
+  if (b.bonus) return { nivel: 'gold', txt: 'Bonus', atraso: 0 };
+  if (H < b.inicio) return p > b.inicial ? { nivel: 'ok', txt: 'Adelantado', atraso: 0 } : { nivel: '', txt: `Arranca el ${fCorta(b.inicio)}`, atraso: 0 };
+  const esperado = idealLibro(b, addDays(H, -1)), idealHoy = idealLibro(b, H), atraso = Math.round(esperado - p);
+  if (p >= idealHoy + 5) return { nivel: 'ok', txt: `Adelantado ${Math.round(p - idealHoy)} p.`, atraso };
+  if (atraso <= 2) return { nivel: 'ok', txt: 'En tiempo', atraso };
+  if (atraso <= 20) return { nivel: 'leve', txt: `Atrasado ${atraso} p.`, atraso };
+  return { nivel: 'fuerte', txt: `Atrasado ${atraso} p.`, atraso };
+}
+function paginasPorDia(b, H = hoy()) {
+  const rest = b.paginas - paginaDe(b.id);
+  if (rest <= 0) return 0;
+  const desde = H < b.inicio ? b.inicio : H, dias = diff(desde, b.meta) + 1;
+  return dias <= 0 ? rest : Math.ceil(rest / dias);
+}
+function libroActivo() {
+  const bs = libros().filter(b => !b.bonus).sort((a, b) => a.orden - b.orden);
+  return bs.find(b => paginaDe(b.id) < b.paginas) || bs[bs.length - 1];
+}
+const librosPrincipalesListos = () => libros().filter(b => !b.bonus && paginaDe(b.id) >= b.paginas).length;
+
+/* ---------- Finanzas ---------- */
+const finHechos = () => storage.get('finHechos', {});
+const temaFinActual = () => CONFIG.finanzas.find(t => !finHechos()[t.n]) || CONFIG.finanzas[CONFIG.finanzas.length - 1];
+
+/* ---------- Cultura ---------- */
+function checksDe(id) { const t = temaCultura(id); const c = storage.get('culChecks', {})[id] || []; return t ? t.checklist.map((_, i) => !!c[i]) : []; }
+const culCompleto = id => { const c = checksDe(id); return c.length > 0 && c.every(Boolean); };
+
+/* ---------- Plan del día ---------- */
+function resolverTexto(it, f) {
+  let t = it.t;
+  if (it.p === 'ia' && !cursoListoEn(f) && !cursoFin()) { const b = bloqueActual(); t = `Curso de Claude Code · bloque ${b.n}`; }
+  return t.replace('{libro}', libroActivo().titulo).replace('{cultura}', periodoDe(f).nombre).replace('{finanzas}', temaFinActual().nombre);
+}
+function planDe(f) {
+  if (f < CONFIG.inicio || f > CONFIG.fin) return null;
+  const H = hoy(), sid = f <= CONFIG.sprintFin ? 'sprint' : 'normal', d = dow(f);
+  const base = clone(semana(sid).dias[d]);
+  let items = base.items; const notas = [];
+  const semanaActual = lunesDe(f) === lunesDe(H) && f >= H;
+  // Regla 4: terminó el curso antes → los días de curso del sprint pasan a lectura y cultura
+  if (sid === 'sprint' && cursoListoEn(f) && items.some(i => i.p === 'ia')) {
+    items = d % 2 === 0
+      ? [{ p: 'lec', min: 45, t: 'Lectura: {libro}' }, { p: 'cul', min: 15, t: 'Cultura: {cultura}' }]
+      : [{ p: 'cul', min: 30, t: 'Cultura: {cultura}' }, { p: 'lec', min: 30, t: 'Lectura: {libro}' }];
+    notas.push('Terminaste el curso: adelantas lectura y cultura.');
+  }
+  // Regla 1: curso atrasado más de 1 bloque → fin de semana de curso
+  if (semanaActual && d >= 5 && !cursoFin() && estadoCurso().nivel === 'fuerte') {
+    const rev = items.find(i => i.p === 'rev');
+    items = rev ? [{ p: 'ia', min: 45, t: 'Curso de Claude Code: a alcanzar la línea' }, rev] : [{ p: 'ia', min: 60, t: 'Curso de Claude Code: a alcanzar la línea' }];
+    notas.push('Ajuste: el curso va atrasado, este fin de semana es de curso.');
+  }
+  // Regla 2: lectura atrasada más de 20 páginas → martes y jueves lectura a 30 min
+  if (semanaActual && (d === 1 || d === 3) && estadoLibro(libroActivo()).nivel === 'fuerte') {
+    const lec = items.find(i => i.p === 'lec');
+    let cambio = true;
+    if (!lec) items.push({ p: 'lec', min: 30, t: 'Lectura: {libro}' });
+    else if (lec.min < 30) lec.min = 30;
+    else cambio = false;
+    if (cambio) notas.push('Ajuste: lectura a 30 min para alcanzar.');
+  }
+  items = items.map(i => ({ ...i, t: resolverTexto(i, f) }));
+  return { sid, tipo: base.tipo, items, total: items.reduce((a, i) => a + i.min, 0), notas };
+}
+
+/* ---------- Rachas ---------- */
+function cumplidos(l) { const m = mapaDias(); let n = 0; for (let i = 0; i < 7; i++) if ((m[addDays(l, i)] || diaVacio()).total >= CONFIG.metaDiaria) n++; return n; }
+const semanaFloja = l => { const prev = addDays(l, -7); return prev >= lunesDe(CONFIG.inicio) && cumplidos(prev) < 5; };
+const umbral = x => semanaFloja(lunesDe(x)) ? CONFIG.parcial : CONFIG.metaDiaria;
+function racha() {
+  const H = hoy(), m = mapaDias(), desde = CONFIG.inicio;
+  if (H < desde) return { actual: 0, mejor: 0 };
+  const cache = {}, um = x => { const l = lunesDe(x); return cache[l] ?? (cache[l] = umbral(x)); };
+  const ok = x => (m[x] || diaVacio()).total >= um(x);
+  let mejor = 0, run = 0;
+  for (let x = desde; x <= H; x = addDays(x, 1)) { if (ok(x)) { run++; mejor = Math.max(mejor, run); } else if (x !== H) run = 0; }
+  let actual = 0;
+  for (let x = H; x >= desde; x = addDays(x, -1)) { if (ok(x)) actual++; else if (x === H) continue; else break; }
+  return { actual, mejor };
+}
+
+/* ---------- Reglas de ajuste ---------- */
+function reglas() {
+  const H = hoy(), R = CONFIG.reglas, out = [];
+  if (H < CONFIG.inicio || H > CONFIG.fin) return out;
+  if (!cursoFin() && estadoCurso().nivel === 'fuerte') out.push({ id: 'curso', tono: 'bad', ...R.curso });
+  const la = libroActivo(), el = estadoLibro(la);
+  if (el.nivel === 'fuerte') out.push({ id: 'lectura', tono: 'bad', titulo: R.lectura.titulo, texto: `${la.titulo}: vas ${el.atraso} p. abajo. ${R.lectura.texto}` });
+  const l = lunesDe(H);
+  if (semanaFloja(l)) out.push({ id: 'dias', tono: 'warn', titulo: R.dias.titulo.replace('{n}', cumplidos(addDays(l, -7))), texto: R.dias.texto });
+  const cf = cursoFin();
+  if (cf && cf < curso().metaFinal && H <= CONFIG.sprintFin) out.push({ id: 'adelantado', tono: 'ok', ...R.adelantado });
+  return out;
+}
+
+/* ---------- Checkpoints ---------- */
+const manual = () => storage.get('manual', {});
+function estadoMeta(m, cp, H = hoy()) {
+  const vencido = H > cp.fecha;
+  const r = (nivel, txt, valor) => ({ nivel, txt, valor });
+  if (m.tipo === 'curso') {
+    const c = curso(), pct = Math.round(minutoCurso() / c.duracion * 100);
+    if (cursoFin()) return r('ok', 'Logrado', '100%');
+    if (vencido) return r('fuerte', 'No se logró', pct + '%');
+    const e = estadoCurso(); return r(e.nivel === 'ok' ? 'camino' : e.nivel, e.nivel === 'ok' ? 'En camino' : 'Atrasado', pct + '%');
+  }
+  if (m.tipo === 'libro') {
+    const b = libro(m.libro), p = paginaDe(b.id), meta = Math.ceil(b.paginas * m.pct / 100), valor = `${Math.round(p / b.paginas * 100)}% · p. ${p}`;
+    if (p >= meta) return r('ok', 'Logrado', valor);
+    if (vencido) return r(m.opcional ? '' : 'fuerte', m.opcional ? 'Opcional' : 'No se logró', valor);
+    if (m.opcional) return r('', 'Opcional', valor);
+    const x0 = addDays(b.inicio, -1), ayer = addDays(H, -1);
+    if (ayer <= x0) return r('camino', 'En camino', valor);
+    const esperado = b.inicial + (meta - b.inicial) * clamp(diff(x0, ayer) / Math.max(1, diff(x0, cp.fecha)), 0, 1);
+    const atraso = Math.round(esperado - p);
+    if (atraso <= 2) return r('camino', 'En camino', valor);
+    return r(atraso <= 20 ? 'leve' : 'fuerte', `Atrasado ${atraso} p.`, valor);
+  }
+  if (m.tipo === 'fin') {
+    if (finHechos()[m.n]) return r('ok', 'Logrado', 'Hecho');
+    return vencido ? r('fuerte', 'No se logró', 'Pendiente') : r('camino', 'En camino', 'Pendiente');
+  }
+  if (m.tipo === 'finTodos') {
+    const n = Object.keys(finHechos()).length;
+    return n >= CONFIG.finanzas.length ? r('ok', 'Logrado', `${n}/6`) : r(vencido ? 'fuerte' : 'camino', vencido ? 'No se logró' : 'En camino', `${n}/6`);
+  }
+  if (m.tipo === 'cul') {
+    const c = checksDe(m.id), k = c.filter(Boolean).length, per = temaCultura(m.id);
+    if (k === c.length && k) return r('ok', 'Logrado', `${k}/${c.length}`);
+    if (vencido) return r('fuerte', 'No se logró', `${k}/${c.length}`);
+    if (per && H > per.fin) return r('leve', 'Te faltan puntos', `${k}/${c.length}`);
+    return r('camino', 'En camino', `${k}/${c.length}`);
+  }
+  if (m.tipo === 'culTodos') {
+    const n = periodos().filter(p => culCompleto(p.id)).length;
+    return n >= periodos().length ? r('ok', 'Logrado', `${n}/${periodos().length}`) : r(vencido ? 'fuerte' : 'camino', vencido ? 'No se logró' : 'En camino', `${n}/${periodos().length}`);
+  }
+  if (m.tipo === 'libros2') {
+    const n = librosPrincipalesListos();
+    return n >= 2 ? r('ok', 'Logrado', '2/2') : r(vencido ? 'fuerte' : 'camino', vencido ? 'No se logró' : 'En camino', `${n}/2`);
+  }
+  if (m.tipo === 'manual') {
+    if (manual()[m.key]) return r('ok', 'Logrado', 'Hecho');
+    return vencido ? r('fuerte', 'No se logró', 'Pendiente') : r('camino', 'En camino', 'Pendiente');
+  }
+  return r('', '', '');
+}
+function estadoCheckpoint(cp, H = hoy()) {
+  const es = cp.metas.map(m => {
+    const e = estadoMeta(m, cp, H);
+    return { m, e: H === cp.fecha && e.nivel === 'camino' ? { ...e, nivel: 'leve', txt: 'Hoy es el corte' } : e };
+  });
+  const req = es.filter(x => !x.m.opcional);
+  if (req.every(x => x.e.nivel === 'ok')) return { nivel: 'gold', txt: 'Logrado', es };
+  if (H > cp.fecha) return { nivel: 'leve', txt: `${req.filter(x => x.e.nivel === 'ok').length} de ${req.length} metas`, es };
+  if (req.some(x => x.e.nivel === 'fuerte')) return { nivel: 'fuerte', txt: 'Atrasado', es };
+  if (req.some(x => x.e.nivel === 'leve')) return { nivel: 'leve', txt: 'Atrasado', es };
+  return { nivel: 'ok', txt: 'En camino', es };
+}
+
+/* ---------- Datos para platicar ---------- */
+function temaDe(s) {
+  if (s.p === 'cul') { const t = temaCultura(s.tema); return t ? t.nombre : 'Cultura'; }
+  if (s.p === 'fin') { const t = CONFIG.finanzas.find(x => x.n === +s.tema); return t ? t.nombre : 'Finanzas'; }
+  if (s.p === 'lec') { const b = libro(s.libro); return b ? b.titulo : 'Lectura'; }
+  return PN[s.p];
+}
+function datos() {
+  return ordenadas().reverse().map(s => {
+    const texto = s.p === 'cul' ? s.dato : s.p === 'fin' ? s.concepto : s.p === 'lec' ? s.idea : null;
+    return texto ? { id: s.id, p: s.p, texto, tema: temaDe(s), temaId: s.p === 'lec' ? s.libro : String(s.tema), fecha: s.fecha } : null;
+  }).filter(Boolean);
+}
+function fraseDelDia() {
+  const H = hoy(), ideas = datos().filter(d => d.p === 'lec');
+  const i = Math.abs(diff(CONFIG.inicio, H));
+  if (ideas.length) { const d = ideas[i % ideas.length]; return { t: d.texto, src: d.tema }; }
+  return { t: CONFIG.frases[i % CONFIG.frases.length], src: '' };
+}
+
+/* ---------- Datos pendientes ---------- */
+function pendientes() {
+  const aj = ajustes().libros || {}, out = [];
+  if ((aj.poderes || {}).inicial == null && !sesiones().some(s => s.libro === 'poderes')) out.push('página actual de Los 11 poderes');
+  if (!(aj.bonus || {}).titulo) out.push('título del libro corto');
+  if (!(aj.dispenza || {}).paginasOk) out.push('páginas de tu edición de Deja de ser tú');
+  return out;
+}
+
+/* ---------- Avisos del día ---------- */
+function avisos() {
+  const H = hoy(), out = [];
+  if (storage.get('setup') && pendientes().length) out.push({ tono: 'warn', t: 'Te faltan datos del inicio', x: cap(pendientes().join(', ')) + '.', btn: { l: 'Completar', a: 'setup' } });
+  const iCp = CONFIG.checkpoints.findIndex(c => c.fecha === H);
+  if (iCp >= 0) out.push({ tono: 'gold', t: `Hoy es el checkpoint ${iCp + 1}`, x: 'Revisa cómo vas en cada pilar.', btn: { l: 'Ver checkpoint', a: 'ir', v: 'checkpoints' } });
+  const cpM = CONFIG.checkpoints.find(c => c.fecha === addDays(H, 1));
+  if (cpM) out.push({ tono: 'acc', t: 'Mañana es checkpoint', x: cpM.metas.filter(m => !m.opcional).map(m => m.txt).join(' · ') + '.' });
+  if (dow(H) === 6 && H >= CONFIG.inicio && H <= addDays(CONFIG.fin, 3) && !storage.get('revisiones', {})[lunesDe(H)])
+    out.push({ tono: 'acc', t: 'Hoy toca tu revisión semanal', x: '15 minutos: cómo te fue y qué ajustas.', btn: { l: 'Hacer revisión', a: 'revision' } });
+  const per = periodoDe(H);
+  if (per.inicio === H && H > CONFIG.inicio) out.push({ tono: 'acc', t: `Arranca: ${per.titulo}`, x: `Al final deberías poder platicar de: ${per.platicar}` });
+  const bo = libro('bonus');
+  if (H >= CONFIG.semanaTec.inicio && H <= CONFIG.semanaTec.fin && paginaDe('bonus') < bo.paginas)
+    out.push({ tono: 'acc', t: 'Semana Tec', x: `Buen momento para el libro corto de ${bo.paginas} páginas.` });
+  const dz = libro('dispenza');
+  if (H === dz.inicio) out.push({ tono: 'acc', t: `Hoy arranca ${dz.titulo}`, x: `Te tocan ${paginasPorDia(dz)} p. al día para terminarlo el ${fCorta(dz.meta)}.` });
+  reglas().forEach(r => out.push({ tono: r.tono, t: r.titulo, x: r.texto }));
+  return out;
+}
+
+/* =====================================================================
+   UI
+   ===================================================================== */
+const state = { tab: 'hoy', mas: null, metas: 'curso', filtro: 'todo', sub: null, plan: null, reg: null, prevMin: null, rep: null, ed: null };
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const pv = p => `--pc:var(--${p});--pt:var(--${p}-t);--pbg:var(--${p}-bg)`;
+const chipP = (p, txt) => `<span class="pchip" style="${pv(p)}"><i></i>${esc(txt || PN[p])}</span>`;
+const chipE = e => e && e.txt ? `<span class="echip ${e.nivel === 'camino' ? 'ok' : e.nivel}">${esc(e.txt)}</span>` : '';
+const I = {
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  play: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"><path d="M8 5.5v13l10.5-6.5z"/></svg>',
+  flag: '<path d="M5.5 21V4"/><path d="M5.5 4.5h11l-2.2 4 2.2 4h-11"/>',
+  clip: '<rect x="5" y="4.5" width="14" height="16.5" rx="2.5"/><path d="M9 4.5h6v2.5H9zM8.5 11h7M8.5 15h5"/>',
+  chart: '<path d="M4 19.5h16"/><path d="M7 16v-5M12 16V7M17 16v-8"/>',
+  sliders: '<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
+  box: '<rect x="3.5" y="5" width="17" height="4.5" rx="1.5"/><path d="M5 9.5V19h14V9.5M10 13h4"/>',
+};
+const svgI = (d, cls = 'ico') => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const TABS = [
+  { id: 'hoy', t: 'Hoy', icon: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6L6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/>' },
+  { id: 'metas', t: 'Metas', icon: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>' },
+  { id: 'racha', t: 'Racha', icon: '<path d="M12 3c1 3.5 5.2 5.6 5.2 10.2a5.2 5.2 0 0 1-10.4 0c0-2.3 1-3.8 2.3-5 .3 1.7 1.2 2.7 2.4 2.9C11 8.6 11.2 5.6 12 3z"/>' },
+  { id: 'platicar', t: 'Platicar', icon: '<path d="M4.5 5.5h15a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 3.5V17.5h-1A1.5 1.5 0 0 1 3 16V7a1.5 1.5 0 0 1 1.5-1.5z"/>' },
+  { id: 'mas', t: 'Más', icon: '<rect x="4" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.8"/>' },
+];
+const MAS = [
+  { id: 'checkpoints', t: 'Checkpoints', s: 'Los 7 cortes cada 2 semanas', icon: I.flag },
+  { id: 'revision', t: 'Revisión semanal', s: 'Cada domingo, 15 min', icon: I.clip },
+  { id: 'progreso', t: 'Progreso', s: 'Minutos, curso y páginas contra la línea ideal', icon: I.chart },
+  { id: 'plan', t: 'Plan y ajustes', s: 'Semana tipo, metas y temas', icon: I.sliders },
+  { id: 'respaldo', t: 'Respaldo', s: 'Exportar, importar o reiniciar', icon: I.box },
+];
+
+function toast(msg, ok = true) {
+  const t = $('#toast');
+  t.innerHTML = (ok ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' : '') + `<span>${esc(msg)}</span>`;
+  t.classList.remove('show'); void t.offsetWidth; t.classList.add('show');
+  clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 2200);
+}
+function confeti() {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const cols = ['var(--gold)', 'var(--ia)', 'var(--fin)', 'var(--lec)', 'var(--cul)'];
+  const el = document.createElement('div'); el.className = 'confeti';
+  el.innerHTML = Array.from({ length: 28 }, (_, i) => {
+    const a = Math.random() * Math.PI * 2, r = 90 + Math.random() * 150;
+    return `<i style="background:${cols[i % cols.length]};--dx:${Math.cos(a) * r}px;--dy:${Math.sin(a) * r + 120}px;--r:${Math.random() * 540 - 270}deg;animation-delay:${Math.random() * 80}ms"></i>`;
+  }).join('');
+  document.body.appendChild(el); setTimeout(() => el.remove(), 1300);
+}
+
+function renderTabs() {
+  $('#tabs').innerHTML = TABS.map(t => `<button class="tab ${state.tab === t.id ? 'on' : ''}" data-action="tab" data-v="${t.id}" aria-label="${t.t}" ${state.tab === t.id ? 'aria-current="page"' : ''}>
+    <svg viewBox="0 0 24 24">${t.icon}</svg>${t.t}</button>`).join('');
+}
+function saludo() { const h = horaMX(); return h >= 5 && h < 12 ? 'Buenos días' : h >= 12 && h < 19 ? 'Buenas tardes' : 'Buenas noches'; }
+function render() {
+  const H = hoy();
+  let titulo = '', kicker = '', html = '';
+  if (state.tab === 'hoy') { titulo = `${saludo()}, Santiago`; html = vistaHoy(); }
+  else if (state.tab === 'metas') { titulo = 'Metas'; kicker = 'Tus 4 pilares'; html = vistaMetas(); }
+  else if (state.tab === 'racha') { titulo = 'Racha'; kicker = 'Una hora al día'; html = vistaRacha(); }
+  else if (state.tab === 'platicar') { titulo = 'Datos para platicar'; kicker = 'Lo que ya sabes contar'; html = vistaPlaticar(); }
+  else {
+    const m = MAS.find(x => x.id === state.mas);
+    titulo = m ? m.t : 'Más'; kicker = m ? 'Más' : '28 sep – 31 dic 2026';
+    html = !m ? vistaMas() : { checkpoints: vistaCheckpoints, revision: vistaRevision, progreso: vistaProgreso, plan: vistaPlan, respaldo: vistaRespaldo }[m.id]();
+  }
+  $('#titulo').textContent = titulo;
+  $('#kicker').textContent = kicker;
+  $('#back').hidden = !(state.tab === 'mas' && state.mas);
+  $('#view').innerHTML = html;
+  renderTabs();
+  const rv = document.getElementById('ring-rev');
+  if (rv && rv.dataset.to !== rv.getAttribute('stroke-dashoffset')) requestAnimationFrame(() => requestAnimationFrame(() => { rv.style.strokeDashoffset = rv.dataset.to; }));
+  state.prevMin = null;
+  void H;
+}
+
+/* ---------- HOY ---------- */
+function anillo(md, prev) {
+  const r = 70, C = 2 * Math.PI * r, meta = CONFIG.metaDiaria, base = Math.max(md.total, meta);
+  const partes = [...P4, 'rev'].filter(p => md[p] > 0), gap = partes.length > 1 ? 3 : 0;
+  let off = 0, segs = '';
+  partes.forEach(p => { const L = md[p] / base * C; segs += `<circle cx="80" cy="80" r="${r}" fill="none" style="stroke:var(--${p})" stroke-width="12" stroke-linecap="butt" stroke-dasharray="${Math.max(0.5, L - gap).toFixed(2)} ${C.toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}"/>`; off += L; });
+  const now = Math.min(1, md.total / meta), antes = Math.min(1, (prev == null ? md.total : prev) / meta);
+  return `<div class="ringw ${md.total >= meta ? 'full' : ''}" role="img" aria-label="${md.total} de ${meta} minutos">
+    <svg viewBox="0 0 160 160"><circle class="track" cx="80" cy="80" r="${r}" fill="none" stroke-width="12"/>
+    <mask id="rmask"><circle id="ring-rev" cx="80" cy="80" r="${r}" fill="none" stroke="#fff" stroke-width="14" stroke-dasharray="${C.toFixed(2)} ${C.toFixed(2)}" stroke-dashoffset="${(C * (1 - antes)).toFixed(2)}" data-to="${(C * (1 - now)).toFixed(2)}"/></mask>
+    <g mask="url(#rmask)" transform="rotate(-90 80 80)">${segs}</g></svg>
+    <div class="rc"><b class="num">${md.total}</b><span>/ ${meta} min</span></div></div>`;
+}
+const SUGERENCIA = { ia: '¿Un pedazo más del curso?', fin: '¿Un video corto de finanzas?', lec: '¿Un capítulo antes de dormir?', cul: '¿Un podcast del tema de la quincena?', rev: '¿Tu revisión de la semana?' };
+function vistaHoy() {
+  const H = hoy(), md = mapaDias()[H] || diaVacio(), plan = planDe(H), per = periodoDe(H), fr = fraseDelDia();
+  let html = `<div><div class="sub">${esc(fLarga(H))}${H >= CONFIG.inicio && H <= CONFIG.fin ? ` · ${esc(per.titulo)}` : ''}</div>
+    <blockquote class="frase">${esc(fr.t)}${fr.src ? `<cite>${esc(fr.src)}</cite>` : ''}</blockquote></div>`;
+  avisos().forEach(a => {
+    html += `<div class="alert ${a.tono}"><i class="ic"></i><div class="grow"><b>${esc(a.t)}</b><p>${esc(a.x)}</p>
+      ${a.btn ? `<button class="btn sm ${a.tono === 'gold' || a.tono === 'acc' ? 'primary' : ''}" data-action="${a.btn.a}" data-v="${esc(a.btn.v || '')}">${esc(a.btn.l)}</button>` : ''}</div></div>`;
+  });
+  html += tarjetaHora(H, md, plan);
+  if (H <= CONFIG.fin) {
+    if (!cursoFin()) html += tarjetaCurso();
+    else html += tarjetaLibro(libroActivo(), true);
+  }
+  return html;
+}
+function tarjetaHora(H, md, plan) {
+  const meta = CONFIG.metaDiaria, faltan = Math.max(0, meta - md.total);
+  let msg, planHTML = '';
+  if (!plan) {
+    if (H < CONFIG.inicio) {
+      const p1 = planDe(CONFIG.inicio);
+      msg = `Tu plan arranca el ${fCorta(CONFIG.inicio)}. Si hoy quieres adelantar, registra lo que hagas.`;
+      planHTML = `<div class="plan"><div class="label" style="margin-bottom:4px">Lo que toca el lunes</div>${p1.items.map(i => itemPlan(i, diaVacio())).join('')}</div>`;
+    } else msg = 'Terminó el trimestre. Lo que registres ahora es pura ganancia.';
+  } else {
+    const pend = plan.items.find(i => (md[i.p] || 0) < i.min);
+    if (md.total >= meta) msg = md.total >= 90 ? 'Hora y media. Hoy sí te luciste.' : 'Hora cumplida. Lo que sigue es ganancia.';
+    else if (md.total === 0) msg = `Hoy toca ${plan.items.map(i => ({ ia: 'IA', fin: 'finanzas', lec: 'lectura', cul: periodoDe(H).nombre.toLowerCase(), rev: 'tu revisión' })[i.p]).filter((v, i, a) => a.indexOf(v) === i).join(', ').replace(/, ([^,]*)$/, ' y $1')}. Empieza con lo primero.`;
+    else msg = `Te faltan ${faltan} min para tu hora. ${pend ? SUGERENCIA[pend.p] : ''}`;
+    if (umbral(H) < meta && md.total >= umbral(H) && md.total < meta) msg = `Con ${md.total} min hoy ya cuenta para la racha. Si puedes, completa la hora.`;
+    planHTML = `<div class="plan"><div class="label" style="margin-bottom:4px">Lo que toca hoy · ${plan.total} min</div>${plan.items.map(i => itemPlan(i, md)).join('')}
+      ${plan.notas.map(n => `<div class="xs muted" style="padding-top:8px">${esc(n)}</div>`).join('')}</div>
+      <div class="tipo"><span class="echip ${plan.tipo === 'libre' ? 'gold' : ''}">${plan.tipo === 'libre' ? 'Día libre' : 'Día estructurado'}</span>
+      <span class="xs muted" style="text-align:right">${plan.tipo === 'libre' ? 'Cambia de pilar si quieres: lo que cuenta es la hora.' : plan.sid === 'sprint' ? 'Sprint del curso' : 'Semana normal'}</span></div>`;
+  }
+  const hoySes = sesiones().filter(s => s.fecha === H);
+  const hist = hoySes.length ? `<div class="hist"><div class="label" style="margin:14px 0 2px">Hoy registraste</div>${hoySes.map(s => `<div class="hrow"><span class="pchip" style="${pv(s.p)};padding:0 8px"><i></i>${s.min}</span><span class="grow">${esc(resumenSesion(s))}</span><button class="del" data-action="borrar-ses" data-v="${s.id}" aria-label="Borrar registro">×</button></div>`).join('')}</div>` : '';
+  const prev = state.prevMin;
+  return `<div class="card hora">${anillo(md, prev)}<p class="msg">${esc(msg)}</p>${planHTML}${hist}</div>`;
+}
+function itemPlan(i, md) {
+  const hecho = (md[i.p] || 0) >= i.min;
+  return `<div class="pi ${hecho ? 'done' : ''}" style="${pv(i.p)}"><i class="bar"></i><div class="grow"><div class="t">${esc(i.t)}</div><div class="s num">${i.min} min${md[i.p] && !hecho ? ` · llevas ${md[i.p]}` : ''}</div></div><span class="ck">${I.check}</span></div>`;
+}
+function resumenSesion(s) {
+  if (s.p === 'ia') return s.video != null ? `Curso: llegaste a ${fHM(s.video)}` : (s.nota || 'IA');
+  if (s.p === 'lec') { const b = libro(s.libro); return `${b ? b.titulo : 'Lectura'} · p. ${s.pagina}`; }
+  if (s.p === 'fin') return s.concepto || temaDe(s);
+  if (s.p === 'cul') return s.dato || temaDe(s);
+  return 'Revisión semanal';
+}
+function tarjetaCurso() {
+  const c = curso(), a = minutoCurso(), b = bloqueActual(), e = estadoCurso();
+  const pre = `<i style="flex:${c.avance}"><b style="width:100%"></b></i>`;
+  const segs = c.bloques.map(bl => `<i style="flex:${Math.max(1, bl.hasta - bl.desde)}"><b style="width:${clamp((a - bl.desde) / Math.max(1, bl.hasta - bl.desde), 0, 1) * 100}%"></b></i>`).join('');
+  const falta = c.duracion - a;
+  return `<div class="card hero" style="${pv('ia')}">
+    <div class="row between">${chipP('ia', 'Curso · prioridad')}${chipE(e)}</div>
+    <div class="big num">${fHM(a)} <small>de ${fHM(c.duracion)} · ${Math.floor(a / c.duracion * 100)}%</small></div>
+    <div class="segbar" aria-hidden="true">${pre}${segs}</div>
+    <div class="small">Vas en ${fHM(a)} de ${fHM(c.duracion)} · Bloque ${b.n} · meta ${fCorta(b.fecha)}</div>
+    <div class="xs muted" style="margin-top:4px">Faltan ${fDur(falta)} de video (≈${fDur(falta * c.factorReal)} reales con pausas para practicar).</div>
+    <div class="acts"><button class="btn primary sm" data-action="registrar" data-v="ia">Registrar avance</button><a class="btn ghost sm" href="${esc(c.url)}" target="_blank" rel="noopener">${I.play} Ver video</a></div>
+  </div>`;
+}
+function portada(b, lg) {
+  const ini = b.autor && b.autor !== 'Por definir' ? b.autor.split(/\s+/).map(w => w[0]).join('').slice(0, 3).toUpperCase() : '—';
+  return `<div class="cover ${b.bonus ? 'bonus' : ''} ${lg ? 'lg' : ''}" aria-hidden="true"><div class="ct">${esc(b.titulo)}</div><div class="ca">${esc(ini)}</div></div>`;
+}
+function tarjetaLibro(b, hero) {
+  const p = paginaDe(b.id), e = estadoLibro(b), ppd = paginasPorDia(b), H = hoy();
+  const txtPpd = p >= b.paginas ? `Terminado el ${fCorta(libroFin(b.id) || H)}` : H < b.inicio ? `Arranca el ${fCorta(b.inicio)} · ${ppd} p. al día` : `Te tocan ${ppd} p. al día · meta ${fCorta(b.meta)}`;
+  return `<div class="card ${hero ? 'hero' : ''}" style="${pv('lec')}">
+    ${hero ? `<div class="row between" style="margin-bottom:14px">${chipP('lec', 'Libro en curso')}${chipE(e)}</div>` : ''}
+    <div class="book">${portada(b)}<div class="grow"><h3>${esc(b.titulo)}</h3><div class="au">${esc(b.autor)}${b.bonus ? ' · bonus' : ''}</div>
+      <div class="small num">Página ${p} de ${b.paginas}</div>
+      <div class="pbar" style="margin:8px 0"><i style="width:${clamp(p / b.paginas * 100, 0, 100)}%"></i></div>
+      <div class="xs muted">${esc(txtPpd)}</div>
+      ${hero ? '' : `<div class="row wrap" style="margin-top:10px;gap:8px">${chipE(e)}</div>`}</div></div>
+    <div class="acts"><button class="btn ${hero ? 'primary' : ''} sm" data-action="registrar" data-v="lec" data-libro="${b.id}">Registrar página</button>${hero ? '' : `<button class="btn ghost sm" data-action="editar-libro" data-v="${b.id}">Editar</button>`}</div>
+  </div>`;
+}
+
+/* ---------- REGISTRO RÁPIDO ---------- */
+function nuevoReg(p, extra = {}) {
+  const H = hoy(), plan = planDe(H), md = mapaDias()[H] || diaVacio();
+  if (!p) { const pend = plan && plan.items.find(i => i.p !== 'rev' && (md[i.p] || 0) < i.min); p = pend ? pend.p : plan ? (plan.items.find(i => i.p !== 'rev') || { p: 'ia' }).p : (cursoFin() ? 'lec' : 'ia'); }
+  const it = plan && plan.items.find(i => i.p === p);
+  const falta = it ? Math.max(15, it.min - (md[p] || 0)) : 30;
+  const min = [15, 30, 45, 60].reduce((a, b) => Math.abs(b - falta) < Math.abs(a - falta) ? b : a);
+  const per = periodoDe(H);
+  return { fecha: H, p, min, video: fHM(minutoCurso()), libro: libroActivo().id, pagina: '', idea: '', tema: String(temaFinActual().n), fuente: '', concepto: '', cul: per.id, dato: '', checks: checksDe(per.id), nota: '', ...extra };
+}
+function abrirRegistro(p, extra) {
+  state.reg = nuevoReg(p, extra);
+  openModal(`<h2>Registrar sesión</h2><div id="reg-body">${regBody()}</div>`);
+}
+function regBody() {
+  const r = state.reg, H = hoy(), c = curso();
+  const pbtns = P4.map(p => `<button class="pbtn ${r.p === p ? 'on' : ''}" style="${pv(p)}" data-action="reg-p" data-v="${p}" aria-pressed="${r.p === p}"><i></i>${PN[p]}</button>`).join('');
+  const mins = [15, 30, 45, 60].map(m => `<button class="mbtn num ${r.min === m ? 'on' : ''}" data-action="reg-min" data-v="${m}">${m}<small>min</small></button>`).join('');
+  let campos = '';
+  if (r.p === 'ia') {
+    campos = cursoFin() ? '' : `<label class="field"><span>¿En qué minuto del video te quedaste?</span><input class="input num" id="reg-video" data-bind="video" value="${esc(r.video)}" inputmode="numeric" placeholder="3:12" autocomplete="off"><div class="xs muted" style="margin-top:6px">Formato h:mm. Vas en ${fHM(minutoCurso())} de ${fHM(c.duracion)}. Si fue día de práctica, déjalo igual.</div></label>`;
+    campos += `<label class="field"><span>Lo que aprendí / lo que quiero probar</span><textarea class="input" data-bind="nota" placeholder="Una línea basta">${esc(r.nota)}</textarea></label>`;
+  } else if (r.p === 'lec') {
+    const b = libro(r.libro);
+    campos = `<label class="field"><span>Libro</span><select class="input" data-bind="libro" data-rerender="1">${libros().map(x => `<option value="${x.id}" ${x.id === r.libro ? 'selected' : ''}>${esc(x.titulo)}${x.bonus ? ' (bonus)' : ''}</option>`).join('')}</select></label>
+      <label class="field"><span>¿En qué página te quedaste?</span><input class="input num" id="reg-pagina" data-bind="pagina" type="number" inputmode="numeric" min="0" max="${b.paginas}" value="${esc(r.pagina)}" placeholder="Ibas en la ${paginaDe(b.id)} de ${b.paginas}"></label>
+      <label class="field"><span>Una idea o frase que te sirvió</span><textarea class="input" data-bind="idea" placeholder="Se vuelve tu frase del día">${esc(r.idea)}</textarea></label>`;
+  } else if (r.p === 'fin') {
+    campos = `<label class="field"><span>Tema</span><select class="input" data-bind="tema">${CONFIG.finanzas.map(t => `<option value="${t.n}" ${String(t.n) === r.tema ? 'selected' : ''}>${t.n}. ${esc(t.nombre)}</option>`).join('')}</select></label>
+      <label class="field"><span>Fuente (link)</span><input class="input" data-bind="fuente" type="url" inputmode="url" value="${esc(r.fuente)}" placeholder="https://" autocomplete="off"></label>
+      <label class="field"><span>1 concepto en tus palabras</span><textarea class="input" data-bind="concepto" placeholder="Explícalo como se lo contarías a un amigo">${esc(r.concepto)}</textarea></label>`;
+  } else if (r.p === 'cul') {
+    const t = temaCultura(r.cul) || periodoDe(H);
+    campos = `<label class="field"><span>Tema</span><select class="input" data-bind="cul" data-rerender="1">${temasCultura().map(x => `<option value="${x.id}" ${x.id === r.cul ? 'selected' : ''}>${esc(x.nombre)}${x.id === periodoDe(H).id ? ' · actual' : ''}</option>`).join('')}</select></label>
+      <label class="field"><span>1 dato para platicar</span><textarea class="input" data-bind="dato" placeholder="Algo que podrías sacar en una comida">${esc(r.dato)}</textarea></label>
+      <div class="field"><span>Checklist (opcional)</span><div class="fs" style="margin-top:0;padding:4px 14px;${pv('cul')}">${t.checklist.map((x, i) => `<button class="cl ${r.checks[i] ? 'on' : ''}" data-action="reg-check" data-v="${i}"><span class="chk">${I.check}</span><span class="tx">${esc(x)}</span></button>`).join('')}</div></div>`;
+  }
+  if (r.p !== 'ia') campos += `<label class="field"><span>Nota (opcional)</span><input class="input" data-bind="nota" value="${esc(r.nota)}" placeholder="Algo más que quieras recordar" autocomplete="off"></label>`;
+  const ayer = addDays(H, -1);
+  return `<div class="pgrid">${pbtns}</div>
+    <div class="field"><span>Minutos</span><div class="mgrid">${mins}</div></div>
+    ${campos}
+    <div class="row" style="margin-top:14px;gap:8px"><span class="xs muted">Fecha:</span><div class="seg" style="flex:1"><button class="${r.fecha === H ? 'on' : ''}" data-action="reg-fecha" data-v="${H}">Hoy</button><button class="${r.fecha === ayer ? 'on' : ''}" data-action="reg-fecha" data-v="${ayer}">Ayer</button></div></div>
+    <button class="btn primary block" style="margin-top:16px" data-action="guardar">${I.check} Guardar</button>`;
+}
+function rerenderReg() { const b = $('#reg-body'); if (b) b.innerHTML = regBody(); }
+function guardarRegistro() {
+  const r = state.reg, H = hoy(), c = curso();
+  const s = { id: uid(), fecha: r.fecha, p: r.p, min: r.min, ts: Date.now() };
+  if (r.nota.trim()) s.nota = r.nota.trim();
+  const antesCurso = cursoFin(), antesLibros = {};
+  libros().forEach(b => { antesLibros[b.id] = paginaDe(b.id) >= b.paginas; });
+  if (r.p === 'ia' && !cursoFin()) {
+    const v = parseHM(r.video);
+    if (r.video.trim() && (v == null || v > c.duracion + 1)) { const el = $('#reg-video'); if (el) el.classList.add('err'); toast(`Escribe el minuto como h:mm (máximo ${fHM(c.duracion)})`, false); return; }
+    if (v != null) s.video = Math.min(v, c.duracion);
+  } else if (r.p === 'lec') {
+    const b = libro(r.libro), pg = parseInt(r.pagina, 10);
+    if (isNaN(pg) || pg < 0 || pg > b.paginas) { const el = $('#reg-pagina'); if (el) el.classList.add('err'); toast(`Pon la página (0 a ${b.paginas})`, false); return; }
+    s.libro = b.id; s.pagina = pg; if (r.idea.trim()) s.idea = r.idea.trim();
+  } else if (r.p === 'fin') {
+    s.tema = r.tema; if (r.fuente.trim()) s.fuente = r.fuente.trim(); if (r.concepto.trim()) s.concepto = r.concepto.trim();
+  } else if (r.p === 'cul') {
+    s.tema = r.cul; if (r.dato.trim()) s.dato = r.dato.trim();
+    const cc = clone(storage.get('culChecks', {})); cc[r.cul] = r.checks.slice(); storage.set('culChecks', cc);
+  }
+  const antes = minDia(r.fecha);
+  if (!storage.set('sesiones', [...sesiones(), s])) { toast('No se pudo guardar: el teléfono no tiene espacio', false); return; }
+  closeModal();
+  const despues = minDia(r.fecha);
+  if (r.fecha === H) { state.tab = 'hoy'; state.prevMin = antes; }
+  render();
+  toast(r.fecha === H ? `Guardado · ${despues}/${CONFIG.metaDiaria} min hoy` : 'Guardado en ayer');
+  if (antes < CONFIG.metaDiaria && despues >= CONFIG.metaDiaria) setTimeout(confeti, 450);
+  if (!antesCurso && cursoFin()) setTimeout(() => logro('curso'), 900);
+  else libros().forEach(b => { if (!antesLibros[b.id] && paginaDe(b.id) >= b.paginas) setTimeout(() => logro(b.id), 900); });
+}
+function logro(id) {
+  const L = storage.get('logros', {}); if (L[id]) return;
+  L[id] = hoy(); storage.set('logros', L);
+  let html;
+  if (id === 'curso') {
+    const c = curso();
+    html = `<div class="cover lg ia"><div class="ct">Claude Code 2026</div><div class="ca">IA</div></div><h2>Curso terminado</h2><div class="k">${fHM(c.duracion)} de video · ${fCorta(cursoFin())}</div><p>La prioridad número uno, lista. Ahora a usarlo en un proyecto propio.</p>`;
+  } else {
+    const b = libro(id), n = librosPrincipalesListos();
+    html = `${portada(b, true)}<h2>${esc(b.titulo)}</h2><div class="k">${b.bonus ? 'Bonus · medio libro extra' : `Libro ${n} de 2`} · ${fCorta(libroFin(id) || hoy())}</div><p>${b.bonus ? 'No estaba en la meta y aun así lo hiciste.' : n >= 2 ? 'Los dos libros del año. Meta cumplida.' : 'Uno menos. El siguiente ya te espera.'}</p>`;
+  }
+  $('#overlay').innerHTML = `<div class="logro" role="dialog" aria-modal="true">${html}<button class="btn primary" style="min-width:200px" data-action="cerrar-logro">Seguir</button></div>`;
+  confeti();
+}
+
+/* ---------- METAS ---------- */
+function vistaMetas() {
+  const segs = [['curso', 'Curso'], ['libros', 'Libros'], ['fin', 'Finanzas'], ['cul', 'Cultura']];
+  let html = `<div class="seg">${segs.map(([k, t]) => `<button class="${state.metas === k ? 'on' : ''}" data-action="metas" data-v="${k}">${t}</button>`).join('')}</div>`;
+  if (state.metas === 'curso') html += metasCurso();
+  else if (state.metas === 'libros') html += libros().sort((a, b) => (a.orden || 1.5) - (b.orden || 1.5)).map(b => tarjetaLibro(b)).join('') + `<p class="xs muted" style="margin:0 4px">La meta del año son 2 libros. El de 77 páginas cuenta como bonus: medio libro que no sustituye a ninguno.</p>`;
+  else if (state.metas === 'fin') html += metasFinanzas();
+  else html += metasCultura();
+  return html;
+}
+function metasCurso() {
+  const c = curso(), a = minutoCurso(), H = hoy(), cf = cursoFin();
+  let html = cf ? `<div class="card hero" style="${pv('ia')}"><div class="row between">${chipP('ia', 'Curso')}${chipE({ nivel: 'gold', txt: 'Terminado' })}</div><div class="big">Curso terminado</div><div class="small muted">Lo terminaste el ${fCorta(cf)}. Ahora toca aplicarlo: proyecto propio los lunes, herramientas nuevas los viernes.</div></div>` : tarjetaCurso();
+  const lista = c.capitulos.length
+    ? c.capitulos.map(ch => `<div class="li" style="${pv('ia')}"><span class="chk ${a >= ch.min - 0.5 ? 'on' : ''}">${I.check}</span><div class="grow"><div class="t">${esc(ch.nombre)}</div><div class="s num">Empieza en ${fHM(ch.min)}</div></div></div>`).join('')
+    : c.bloques.map(b => {
+      const hecho = a >= b.hasta - 0.5, toca = !hecho && b.n === bloqueActual().n, vencido = !hecho && H > b.fecha;
+      const e = hecho ? { nivel: 'ok', txt: 'Hecho' } : vencido ? { nivel: 'fuerte', txt: 'Atrasado' } : toca ? { nivel: 'gold', txt: 'Toca' } : { nivel: '', txt: 'Pendiente' };
+      return `<div class="li" style="${pv('ia')}"><span class="chk ${hecho ? 'on' : ''}">${I.check}</span><div class="grow"><div class="t">Bloque ${b.n} · ${fHM(b.desde)} → ${fHM(b.hasta)}</div><div class="s">Meta ${fCorta(b.fecha)}</div></div>${chipE(e)}</div>`;
+    }).join('');
+  html += `<div class="card"><h2>${c.capitulos.length ? 'Capítulos' : 'Bloques de 45 min'} <button class="link" data-action="editar-capitulos">${c.capitulos.length ? 'Editar' : 'Usar capítulos'}</button></h2>${lista}
+    <p class="xs muted" style="margin:10px 0 0">Meta: terminarlo el ${fCorta(c.metaFinal)} (colchón hasta el ${fCorta(c.colchon)}).</p></div>`;
+  const ses = ordenadas().filter(s => s.p === 'ia').reverse();
+  html += `<div class="card"><h2>Historial <small>${pl(ses.length, 'sesión', 'sesiones')}</small></h2>${ses.length ? ses.map(s => `<div class="li"><div class="grow"><div class="t num">${fCorta(s.fecha)} · ${s.min} min${s.video != null ? ` · llegaste a ${fHM(s.video)}` : ''}</div>${s.nota ? `<div class="s">${esc(s.nota)}</div>` : ''}</div><button class="del" data-action="borrar-ses" data-v="${s.id}" aria-label="Borrar">×</button></div>`).join('') : '<div class="empty">Tu primera sesión aparece aquí, con lo que aprendiste.</div>'}</div>`;
+  return html;
+}
+function metasFinanzas() {
+  const hechos = finHechos(), act = temaFinActual(), ses = ordenadas().filter(s => s.p === 'fin');
+  let html = `<div class="card" style="${pv('fin')}"><h2>Ruta de finanzas <small>${Object.keys(hechos).length}/6</small></h2>`;
+  html += CONFIG.finanzas.map(t => {
+    const cs = ses.filter(s => String(s.tema) === String(t.n)), on = !!hechos[t.n];
+    return `<div class="li" style="align-items:flex-start"><button class="chk ${on ? 'on' : ''}" data-action="fin-hecho" data-v="${t.n}" aria-label="Marcar tema ${t.n} como hecho" style="margin-top:2px">${I.check}</button>
+      <div class="grow"><div class="row between"><span class="t">${t.n}. ${esc(t.nombre)}</span>${t.n === act.n && !on ? chipE({ nivel: 'gold', txt: 'Ahora' }) : ''}</div>
+      <div class="s">${esc(t.detalle)}</div><div class="s">Meta: ${fCorta(t.meta)}${cs.length ? ` · ${pl(cs.length, 'sesión', 'sesiones')}` : ''}</div>
+      ${cs.filter(s => s.concepto).map(s => `<div class="small" style="margin-top:6px;font-family:var(--serif);font-style:italic">“${esc(s.concepto)}”${s.fuente ? ` <a class="xs muted" href="${esc(s.fuente)}" target="_blank" rel="noopener">fuente</a>` : ''}</div>`).join('')}</div></div>`;
+  }).join('');
+  return html + `<p class="xs muted" style="margin:10px 0 0">Un tema cada 2 semanas, con videos, artículos o podcasts. Márcalo cuando ya lo puedas explicar.</p></div>`;
+}
+function metasCultura() {
+  const H = hoy(), ps = periodos(), act = periodoDe(H);
+  const bloque = (t, grande) => {
+    const c = checksDe(t.id), k = c.filter(Boolean).length, n = sesiones().filter(s => s.p === 'cul' && s.tema === t.id && s.dato).length;
+    return `<div class="card ${grande ? 'hero' : ''}" style="${pv('cul')}">
+      <div class="row between">${chipP('cul', t.extra ? 'Tema extra' : grande ? 'Esta quincena' : `${fDia(t.inicio)} – ${fDia(t.fin)}`)}<span class="echip ${k === c.length ? 'gold' : ''}">${k}/${c.length}</span></div>
+      <h2 style="margin:12px 0 4px">${esc(t.nombre)}</h2>
+      <div class="small muted">${esc(t.platicar)}</div>
+      ${grande ? `<div style="margin-top:10px">${t.checklist.map((x, i) => `<button class="cl ${c[i] ? 'on' : ''}" data-action="cul-check" data-v="${t.id}" data-i="${i}"><span class="chk">${I.check}</span><span class="tx">${esc(x)}</span></button>`).join('')}</div>` : ''}
+      <div class="row between" style="margin-top:10px"><span class="xs muted">${pl(n, 'dato para platicar', 'datos para platicar')}</span><span class="row" style="gap:14px">${grande ? '' : `<button class="link" data-action="ver-cul" data-v="${t.id}">Checklist</button>`}<button class="link" data-action="editar-cul" data-v="${t.id}">Editar</button></span></div>
+    </div>`;
+  };
+  let html = bloque(act, true);
+  if (state.sub && state.sub !== act.id && temaCultura(state.sub)) html += bloque(temaCultura(state.sub), true);
+  const sig = ps.filter(p => p.inicio > act.inicio), pas = ps.filter(p => p.fin < act.inicio);
+  if (sig.length) html += `<div class="sect">Siguientes</div>` + sig.map(p => bloque(p)).join('');
+  if (pas.length) html += `<div class="sect">Pasados</div>` + pas.map(p => bloque(p)).join('');
+  const ex = extrasCultura();
+  html += `<div class="sect">Temas extra</div>${ex.map(p => bloque(p)).join('')}<button class="btn ghost block" data-action="editar-cul" data-v="">+ Agregar tema (relojes, arte, historia…)</button>`;
+  return html;
+}
+
+/* ---------- RACHA ---------- */
+function vistaRacha() {
+  const r = racha(), H = hoy(), m = mapaDias();
+  let animo;
+  if (r.actual === 0 && r.mejor > 0) animo = `Racha rota, no pasa nada. La mejor fue de ${pl(r.mejor, 'día', 'días')}: vamos por ${r.mejor + 1}.`;
+  else if (r.actual === 1) animo = 'Día uno. Con tu hora de hoy ya son dos.';
+  else if (r.actual > 0 && r.actual >= r.mejor) animo = 'Es tu mejor racha. Cuídala con tu hora de hoy.';
+  else if (r.actual > 0) animo = `Vas en ${pl(r.actual, 'día', 'días')}. Tu récord es ${r.mejor}.`;
+  else animo = 'Tu racha empieza con la primera hora completa.';
+  let html = `<div class="stats"><div class="stat"><div class="label">Racha actual</div><div class="v num" style="margin-top:8px">${r.actual}</div><div class="u">${r.actual === 1 ? 'día seguido' : 'días seguidos'}</div></div>
+    <div class="stat gold"><div class="label">Mejor racha</div><div class="v num" style="margin-top:8px">${r.mejor}</div><div class="u">${r.mejor === 1 ? 'día' : 'días'}</div></div></div>
+    <p class="msg" style="margin:0 4px">${esc(animo)}</p>`;
+  const l0 = lunesDe(CONFIG.inicio), nW = diff(l0, lunesDe(CONFIG.fin)) / 7 + 1;
+  let cells = '<span></span>', prevMes = -1;
+  for (let w = 0; w < nW; w++) {
+    const mm = D(addDays(l0, w * 7 + 6)).getUTCMonth();
+    cells += `<span class="hl">${mm !== prevMes ? MESES[mm] : ''}</span>`; prevMes = mm;
+  }
+  for (let d = 0; d < 7; d++) {
+    cells += `<span class="hl">${d % 2 === 0 ? DIAS_1[d] : ''}</span>`;
+    for (let w = 0; w < nW; w++) {
+      const x = addDays(l0, w * 7 + d), t = (m[x] || diaVacio()).total;
+      let cls = x < CONFIG.inicio || x > CONFIG.fin ? 'out' : t >= 60 ? 'l3' : t >= 30 ? 'l2' : t > 0 ? 'l1' : '';
+      if (t >= 90) cls += ' gd';
+      if (x > H) cls += ' fut';
+      if (x === H) cls += ' today';
+      cells += `<i class="hc ${cls}" title="${fCorta(x)}: ${t} min"></i>`;
+    }
+  }
+  html += `<div class="card"><h2>El trimestre <small>28 sep – 31 dic</small></h2><div class="heat" style="grid-template-columns:12px repeat(${nW},minmax(0,1fr))">${cells}</div>
+    <div class="legend"><span><i style="background:var(--h0)"></i>0</span><span><i style="background:var(--h1)"></i>1–29</span><span><i style="background:var(--h2)"></i>30–59 · parcial</span><span><i style="background:var(--h3)"></i>60+</span><span><i style="background:var(--gold);border-radius:50%"></i>90+</span></div></div>`;
+  const l = lunesDe(H), cum = cumplidos(l);
+  const bars = Array.from({ length: 7 }, (_, i) => { const x = addDays(l, i), t = (m[x] || diaVacio()).total; return `<div><span class="num">${t || ''}</span><i class="${t >= 60 ? 'ok' : t ? '' : 'z'}" style="height:${clamp(t / 90, 0.04, 1) * 60}px"></i>${DIAS_1[i]}</div>`; }).join('');
+  html += `<div class="card"><h2>Esta semana <small>${cum}/7 días con tu hora</small></h2><div class="wkd">${bars}</div>
+    <p class="xs muted" style="margin:12px 0 0">${semanaFloja(l) ? 'Esta semana 30 min cuentan para la racha: la semana pasada fue floja y lo importante es no romper el hábito.' : 'Un día cuenta para la racha con 60 min. Los días de 30+ se ven como parciales. Si una racha se rompe, tu mejor marca se queda guardada.'}</p></div>`;
+  return html;
+}
+
+/* ---------- PLATICAR ---------- */
+function vistaPlaticar() {
+  const all = datos(), f = state.filtro;
+  const lista = all.filter(d => f === 'todo' || d.p === f).filter(d => !state.sub || d.temaId === state.sub);
+  const filtros = [['todo', 'Todo'], ['cul', 'Cultura'], ['fin', 'Finanzas'], ['lec', 'Libros']];
+  let html = `<div class="card" style="text-align:center"><div class="label">Modo repaso</div><div class="big serif" style="font-size:40px;font-weight:600;margin:6px 0 2px">${all.length}</div>
+    <div class="small muted">${all.length ? `${pl(pendientesRepaso().length, 'tarjeta toca', 'tarjetas tocan')} hoy. Ideal antes de una comida o un evento.` : 'Aquí se juntan tus datos, conceptos e ideas.'}</div>
+    <button class="btn primary block" style="margin-top:14px" data-action="repaso" ${all.length ? '' : 'disabled'}>Repasar</button></div>
+    <div class="hscroll">${filtros.map(([k, t]) => `<button class="chip ${f === k ? 'on' : ''}" data-action="filtro" data-v="${k}">${t}</button>`).join('')}</div>`;
+  if (f !== 'todo') {
+    const temas = [...new Map(all.filter(d => d.p === f).map(d => [d.temaId, d.tema])).entries()];
+    if (temas.length > 1) html += `<div class="hscroll" style="margin-top:8px">${temas.map(([id, t]) => `<button class="chip ${state.sub === id ? 'on' : ''}" data-action="filtro-sub" data-v="${esc(id)}">${esc(t)}</button>`).join('')}</div>`;
+  }
+  html += lista.length ? lista.map(d => `<div class="card dato" style="${pv(d.p)}"><span class="q" aria-hidden="true">“</span><p>${esc(d.texto)}</p><div class="ft"><span>${esc(d.tema)} · ${fDia(d.fecha)}</span><button class="del" data-action="borrar-ses" data-v="${d.id}" aria-label="Borrar">×</button></div></div>`).join('')
+    : `<div class="empty">${all.length ? 'Nada con este filtro.' : 'Registra un dato en cultura, un concepto en finanzas o una idea de tu libro y aparece aquí.'}</div>`;
+  return html;
+}
+const repasoData = () => storage.get('repaso', {});
+function pendientesRepaso() { const H = hoy(), R = repasoData(); return datos().filter(d => !R[d.id] || R[d.id].prox <= H); }
+function iniciarRepaso() {
+  const R = repasoData();
+  let cola = pendientesRepaso().sort((a, b) => ((R[a.id] || {}).caja || 0) - ((R[b.id] || {}).caja || 0) || Math.random() - .5);
+  if (!cola.length) cola = datos().sort(() => Math.random() - .5);
+  state.rep = { cola: cola.slice(0, 20).map(d => d.id), i: 0, v: false, sabe: 0, otra: 0 };
+  renderRepaso();
+}
+function renderRepaso() {
+  const rp = state.rep, el = $('#overlay');
+  if (!rp) { el.innerHTML = ''; return; }
+  if (rp.i >= rp.cola.length) {
+    el.innerHTML = `<div class="repaso" role="dialog" aria-modal="true"><div class="top2"><span class="label">Repaso terminado</span><button class="iconbtn" data-action="cerrar-repaso" aria-label="Cerrar">×</button></div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center"><div class="serif" style="font-size:40px;font-weight:600">Listo</div>
+      <p class="muted">${pl(rp.sabe, 'ya te lo sabías', 'ya te las sabías')} · ${rp.otra} para repasar otra vez.<br>Las que te sabes vuelven en unos días.</p></div>
+      <button class="btn primary block" data-action="cerrar-repaso">Cerrar</button></div>`;
+    return;
+  }
+  const d = datos().find(x => x.id === rp.cola[rp.i]);
+  if (!d) { rp.i++; return renderRepaso(); }
+  const pista = d.texto.split(/\s+/).slice(0, 3).join(' ');
+  el.innerHTML = `<div class="repaso" role="dialog" aria-modal="true" style="${pv(d.p)}">
+    <div class="top2"><span class="label num">${rp.i + 1} de ${rp.cola.length}</span><button class="iconbtn" data-action="cerrar-repaso" aria-label="Cerrar">×</button></div>
+    <div class="flipw"><div class="flip ${rp.v ? 'v' : ''}" data-action="voltear">
+      <div class="face"><div>${chipP(d.p, d.tema)}</div><div class="tx" style="margin-top:22px">${esc(pista)}…</div><div class="small muted" style="margin-top:14px">¿Te acuerdas cómo sigue? Dilo en voz alta.</div><div class="hint">Toca para voltear</div></div>
+      <div class="face back"><div class="q" aria-hidden="true">“</div><div class="tx">${esc(d.texto)}</div><div class="small muted" style="margin-top:14px">${esc(d.tema)} · ${fDia(d.fecha)}</div></div>
+    </div></div>
+    <div class="rep-acts">${rp.v ? `<button class="btn" data-action="rep-otra">Repasar otra vez</button><button class="btn primary" data-action="rep-sabe">Ya me lo sé</button>` : `<button class="btn primary" style="grid-column:1/-1" data-action="voltear">Ver el dato</button>`}</div>
+  </div>`;
+}
+function calificar(sabe) {
+  const rp = state.rep, id = rp.cola[rp.i], R = clone(repasoData()), H = hoy(), cur = R[id] || { caja: 0 };
+  const DIAS_CAJA = [1, 3, 7, 14, 30];
+  if (sabe) { const caja = Math.min(5, cur.caja + 1); R[id] = { caja, prox: addDays(H, DIAS_CAJA[caja - 1]) }; rp.sabe++; }
+  else { R[id] = { caja: 1, prox: H }; rp.otra++; if (rp.cola.filter(x => x === id).length < 2) rp.cola.push(id); }
+  storage.set('repaso', R);
+  rp.i++; rp.v = false; renderRepaso();
+}
+
+/* ---------- MÁS ---------- */
+function vistaMas() {
+  return `<div class="card">${MAS.map(m => `<button class="menu" data-action="mas" data-v="${m.id}">${svgI(m.icon)}<div class="grow"><div class="t">${m.t}</div><div class="s">${m.s}</div></div><span class="chev">›</span></button>`).join('')}</div>
+    <p class="xs muted" style="text-align:center">Aprendizaje Santiago · v1 · funciona sin internet${fechaDebug ? ` · fecha simulada ${fechaDebug}` : ''}${storage.ready() ? '' : ' · este navegador no está guardando datos'}</p>`;
+}
+
+/* ---------- CHECKPOINTS ---------- */
+function vistaCheckpoints() {
+  const H = hoy(), next = CONFIG.checkpoints.find(c => c.fecha >= H);
+  let html = '';
+  const rs = reglas();
+  if (rs.length) html += `<div class="card"><h2>Reglas de ajuste <small>activas hoy</small></h2>${rs.map(r => `<div class="rec ${r.tono}"><b>${esc(r.titulo)}</b>${esc(r.texto)}</div>`).join('')}</div>`;
+  CONFIG.checkpoints.forEach((cp, i) => {
+    const isNext = next && next.fecha === cp.fecha, lejos = cp.fecha > H && !isNext;
+    const ec = estadoCheckpoint(cp);
+    const badge = lejos ? `<span class="echip">En ${diff(H, cp.fecha)} días</span>` : chipE(ec);
+    html += `<div class="card cp ${isNext ? 'next' : ''} ${ec.nivel === 'gold' ? 'logrado' : ''}">
+      <div class="row between" style="align-items:flex-start"><div><div class="date">${fCorta(cp.fecha)}${isNext ? ` · ${cp.fecha === H ? 'hoy' : `en ${pl(diff(H, cp.fecha), 'día', 'días')}`}` : ''}</div><div class="ttl">Checkpoint ${i + 1}</div></div>${badge}</div>
+      <div style="margin-top:10px">${ec.es.map(({ m, e }) => `<div class="mt" style="${pv(m.p)}"><i class="dot"></i><div class="t">${esc(m.txt)}<small class="num">${esc(e.valor)}</small></div>
+        ${m.tipo === 'manual' ? `<button class="btn sm ${manual()[m.key] ? 'primary' : 'ghost'}" style="min-height:36px" data-action="manual" data-v="${m.key}">${manual()[m.key] ? 'Hecho' : 'Marcar'}</button>` : lejos ? '' : chipE(e)}</div>`).join('')}</div>
+    </div>`;
+  });
+  return html;
+}
+
+/* ---------- REVISIÓN SEMANAL ---------- */
+function vistaRevision() {
+  const H = hoy(), revs = storage.get('revisiones', {}), l = lunesDe(H), hecha = revs[l];
+  let html = `<div class="card"><h2>${hecha ? 'Revisión de esta semana' : 'Tu revisión de esta semana'}</h2>
+    <p class="small muted" style="margin:0">${hecha ? `La hiciste el ${fCorta(hecha.fecha)}. Puedes rehacerla si quieres.` : 'Cada domingo, 15 minutos. Te traigo los números; tú pones la reflexión.'}</p>
+    <button class="btn primary block" style="margin-top:14px" data-action="revision">${hecha ? 'Rehacer revisión' : 'Hacer revisión'}</button></div>`;
+  const ks = Object.keys(revs).sort().reverse();
+  html += `<div class="sect">Historial</div>`;
+  html += ks.length ? `<div class="card">${ks.map(k => { const r = revs[k]; return `<details class="dt"><summary>Semana del ${fDia(k)} <span class="xs muted num" style="margin-left:auto;margin-right:10px">${r.dias}/7</span></summary>
+      <div class="small" style="margin-top:8px">${Object.entries(r.estados || {}).map(([p, t]) => `<div class="row" style="padding:3px 0">${chipP(p)}<span>${esc(t)}</span></div>`).join('')}</div>
+      ${(r.top || []).length ? `<div class="label" style="margin-top:10px">Lo mejor de la semana</div><ul class="small" style="margin:6px 0 0;padding-left:18px">${r.top.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
+      ${r.ajuste ? `<div class="label" style="margin-top:10px">Qué ajusto</div><div class="small">${esc(r.ajuste)}</div>` : ''}</details>`; }).join('')}</div>`
+    : '<div class="empty">Tu primera revisión es el domingo 4 de octubre.</div>';
+  return html;
+}
+function estadosSemana() {
+  const la = libroActivo(), el = estadoLibro(la), ec = estadoCurso(), per = periodoDe(hoy()), c = checksDe(per.id);
+  return {
+    ia: cursoFin() ? 'Curso terminado' : `Curso en ${fHM(minutoCurso())} · ${ec.txt.toLowerCase()}`,
+    lec: `${la.titulo}: p. ${paginaDe(la.id)} · ${el.txt.toLowerCase()}`,
+    fin: `${Object.keys(finHechos()).length}/6 temas · ahora: ${temaFinActual().nombre}`,
+    cul: `${per.nombre}: ${c.filter(Boolean).length}/${c.length} de la checklist`,
+  };
+}
+function modalRevision() {
+  const H = hoy(), l = lunesDe(H), prev = storage.get('revisiones', {})[l] || {};
+  const n = cumplidos(l), est = estadosSemana(), fin = addDays(l, 6);
+  const semana = datos().filter(d => d.fecha >= l && d.fecha <= fin);
+  state.ed = { top: new Set(prev.top || []) };
+  const recs = reglas();
+  const yaRev = sesiones().some(s => s.fecha === H && s.p === 'rev');
+  openModal(`<h2>Revisión semanal</h2><div class="small muted">Semana del ${fDia(l)} al ${fDia(fin)}</div>
+    <div class="fs"><div class="field"><span>1 · ¿Cumpliste la hora diaria?</span><div class="serif num" style="font-size:34px;font-weight:600">${n}<span class="muted" style="font-size:18px"> / 7 días</span></div>
+      <div class="xs muted">${n >= 5 ? 'Buena semana.' : 'Menos de 5 días: la próxima semana 30 min también cuentan para la racha.'}</div></div></div>
+    <div class="fs"><div class="field"><span>2 · Cómo vas contra lo esperado</span>${Object.entries(est).map(([p, t]) => `<div class="row" style="padding:5px 0;align-items:flex-start">${chipP(p)}<span class="small">${esc(t)}</span></div>`).join('')}</div></div>
+    <div class="fs"><div class="field"><span>3 · Tus 3 mejores aprendizajes</span>${semana.length ? `<div class="xs muted" style="margin-bottom:4px">Toca hasta 3 de lo que registraste esta semana.</div>${semana.map(d => `<button class="cl ${state.ed.top.has(d.texto) ? 'on' : ''}" style="${pv(d.p)}" data-action="rev-top" data-v="${esc(d.id)}"><span class="chk">${I.check}</span><span class="tx">${esc(d.texto)}</span></button>`).join('')}` : ''}
+      <textarea class="input" id="rev-otro" style="margin-top:8px;min-height:70px" placeholder="Otro aprendizaje (opcional)">${esc((prev.top || []).filter(t => !semana.some(d => d.texto === t)).join('\n'))}</textarea></div></div>
+    <div class="fs"><div class="field"><span>4 · ¿Qué ajustas la próxima semana?</span>${recs.map(r => `<div class="rec ${r.tono}" style="margin:0 0 8px"><b>${esc(r.titulo)}</b>${esc(r.texto)}</div>`).join('')}
+      <textarea class="input" id="rev-ajuste" placeholder="Por ejemplo: leer en el trayecto al Tec">${esc(prev.ajuste || '')}</textarea></div></div>
+    ${yaRev ? '' : `<label class="row small" style="margin-top:14px;gap:10px"><input type="checkbox" id="rev-min" checked style="width:22px;height:22px"> Sumar 15 min de revisión a tu hora de hoy</label>`}
+    <button class="btn primary block" style="margin-top:16px" data-action="guardar-revision">${I.check} Guardar revisión</button>`);
+}
+
+/* ---------- PROGRESO ---------- */
+function niceStep(raw) { const p = Math.pow(10, Math.floor(Math.log10(raw))), n = raw / p; return (n < 1.5 ? 1 : n < 3 ? 2 : n < 7 ? 5 : 10) * p; }
+function lineChart(o) {
+  const W = 340, Hh = 190, L = 36, R = 14, T = 14, B = 24;
+  const x0 = o.xMin, x1 = o.xMax, span = Math.max(1, diff(x0, x1));
+  if (!o.series.some(s => s.real && s.pts.length > 1)) return `<div class="empty">${esc(o.vacio)}</div>`;
+  const vals = []; o.series.forEach(s => s.pts.forEach(p => vals.push(p.y)));
+  let lo = o.yMin != null ? o.yMin : Math.min(...vals), hi = o.yMax != null ? o.yMax : Math.max(...vals);
+  if (hi - lo < 1) hi = lo + 1;
+  const step = o.step || niceStep((hi - lo) / 4); lo = Math.floor(lo / step) * step; hi = Math.ceil(hi / step) * step;
+  const X = s => (L + clamp(diff(x0, s), 0, span) / span * (W - L - R)).toFixed(1);
+  const Y = v => (T + (hi - v) / (hi - lo) * (Hh - T - B)).toFixed(1);
+  const fy = o.fmtY || (v => Math.round(v));
+  let g = '';
+  const lines = []; for (let v = lo; v <= hi + 1e-9; v += step) lines.push(v);
+  const keep = lines.length > 4 ? [lines[0], lines[Math.floor(lines.length / 2)], lines[lines.length - 1]] : lines;
+  keep.forEach(v => { g += `<line class="grid" x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="axis num" x="${L - 6}" y="${+Y(v) + 3.5}" text-anchor="end">${fy(v)}</text>`; });
+  if (span <= 40) { const st = Math.ceil(span / 5); for (let k = 0; k <= span; k += st) { const s = addDays(x0, k); g += `<text class="axis" x="${X(s)}" y="${Hh - 6}" text-anchor="middle">${fDia(s)}</text>`; } }
+  else { let [yy, mm] = x0.split('-').map(Number); for (let k = 0; k < 8; k++) { mm++; if (mm > 12) { mm = 1; yy++; } const s = `${yy}-${String(mm).padStart(2, '0')}-01`; if (s > x1) break; g += `<text class="axis" x="${X(s)}" y="${Hh - 6}" text-anchor="middle">${MESES[mm - 1]}</text>`; } }
+  const H = hoy();
+  if (H >= x0 && H <= x1) g += `<line x1="${X(H)}" x2="${X(H)}" y1="${T}" y2="${Hh - B}" style="stroke:var(--text);opacity:.25"/>`;
+  o.series.forEach(s => {
+    if (!s.pts.length) return;
+    const d = s.pts.map((p, i) => `${i ? 'L' : 'M'}${X(p.x)} ${Y(p.y)}`).join(' ');
+    g += `<path d="${d}" fill="none" style="stroke:${s.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ${s.dash ? 'stroke-dasharray="4 5"' : ''}/>`;
+    if (s.real) { const last = s.pts[s.pts.length - 1]; g += `<circle cx="${X(last.x)}" cy="${Y(last.y)}" r="4" style="fill:${s.color};stroke:var(--surface)" stroke-width="2"/>`; }
+  });
+  return `<svg class="chart" viewBox="0 0 ${W} ${Hh}" role="img" aria-label="${esc(o.titulo)}">${g}</svg>`;
+}
+const leyenda = items => `<div class="legend">${items.map(([c, t, dash]) => `<span><i style="${dash ? `background:none;border-top:2px dashed ${c};height:0;width:14px;border-radius:0` : `background:${c}`}"></i>${t}</span>`).join('')}</div>`;
+function barrasSemanas() {
+  const H = hoy(), m = mapaDias(), l0 = lunesDe(CONFIG.inicio), lEnd = lunesDe(H < CONFIG.fin ? H : CONFIG.fin);
+  const weeks = [];
+  for (let l = l0; l <= lEnd; l = addDays(l, 7)) {
+    const w = { l, ia: 0, fin: 0, lec: 0, cul: 0 };
+    for (let i = 0; i < 7; i++) { const d = m[addDays(l, i)]; if (d) P4.forEach(p => { w[p] += d[p]; }); }
+    w.t = P4.reduce((a, p) => a + w[p], 0); weeks.push(w);
+  }
+  if (!weeks.some(w => w.t)) return `<div class="empty">Aparece con tu primera semana de registros.</div>`;
+  const W = 340, Hh = 190, L = 30, R = 8, T = 12, B = 24, meta = CONFIG.metaDiaria * 7;
+  const top = Math.ceil(Math.max(meta, ...weeks.map(w => w.t)) / 120) * 120;
+  const n = Math.max(weeks.length, 6), slot = (W - L - R) / n, bw = Math.min(24, slot * .62);
+  const Y = v => T + (top - v) / top * (Hh - T - B);
+  let g = '';
+  [0, top / 2, top].forEach(v => { g += `<line class="grid" x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="axis num" x="${L - 6}" y="${Y(v) + 3.5}" text-anchor="end">${v / 60} h</text>`; });
+  g += `<line x1="${L}" x2="${W - R}" y1="${Y(meta)}" y2="${Y(meta)}" style="stroke:var(--faint)" stroke-width="1.5" stroke-dasharray="4 5"/><text class="axis" x="${W - R}" y="${Y(meta) - 5}" text-anchor="end">meta 7 h</text>`;
+  weeks.forEach((w, i) => {
+    const x = L + i * slot + (slot - bw) / 2, h0 = Hh - B;
+    const hT = h0 - Y(w.t);
+    g += `<clipPath id="cb${i}"><rect x="${x}" y="${h0 - hT}" width="${bw}" height="${hT}" rx="4"/></clipPath><g clip-path="url(#cb${i})">`;
+    let y = h0;
+    P4.forEach(p => { if (!w[p]) return; const h = w[p] / top * (Hh - T - B); g += `<rect x="${x}" y="${y - h}" width="${bw}" height="${h}" style="fill:var(--${p});stroke:var(--surface)" stroke-width="1"/>`; y -= h; });
+    g += `</g>`;
+    const dd = D(w.l); if (i % Math.ceil(weeks.length / 7) === 0) g += `<text class="axis" x="${x + bw / 2}" y="${Hh - 6}" text-anchor="middle">${dd.getUTCDate()} ${MESES[dd.getUTCMonth()]}</text>`;
+  });
+  return `<svg class="chart" viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Minutos por pilar por semana">${g}</svg>`;
+}
+function vistaProgreso() {
+  const H = hoy(), m = mapaDias(), c = curso();
+  const tot = {}; P4.forEach(p => { tot[p] = 0; }); let total = 0, dias = 0;
+  Object.entries(m).forEach(([f, d]) => { P4.forEach(p => { tot[p] += d[p]; }); total += d.total; if (d.total >= 60) dias++; });
+  let html = `<div class="stats"><div class="stat"><div class="label">Horas totales</div><div class="v num" style="margin-top:8px">${(total / 60).toFixed(total >= 600 ? 0 : 1)}</div><div class="u">${pl(dias, 'día con tu hora', 'días con tu hora')}</div></div>
+    <div class="stat"><div class="label">Por pilar</div>${P4.map(p => `<div class="row between small" style="margin-top:6px"><span class="row" style="gap:6px"><i style="width:8px;height:8px;border-radius:50%;background:var(--${p})"></i>${PN[p]}</span><b class="num">${fDur(tot[p])}</b></div>`).join('')}</div></div>`;
+  html += `<div class="card"><h2>Minutos por semana</h2>${barrasSemanas()}${leyenda(P4.map(p => [`var(--${p})`, PN[p]]))}</div>`;
+  const ideal = [{ x: c.fechaAvance, y: c.avance }, ...c.bloques.map(b => ({ x: b.fecha, y: b.hasta }))];
+  const real = [{ x: c.fechaAvance, y: c.avance }, ...ordenadas().filter(s => s.p === 'ia' && s.video != null).map(s => ({ x: s.fecha, y: s.video }))];
+  const xMaxC = [c.colchon, ...real.map(p => p.x)].sort().pop();
+  html += `<div class="card"><h2>Curso de Claude Code <small>${fHM(minutoCurso())} de ${fHM(c.duracion)}</small></h2>
+    ${lineChart({ titulo: 'Avance del curso contra la línea ideal', xMin: c.fechaAvance, xMax: xMaxC, yMin: Math.floor(c.avance / 60) * 60, yMax: c.duracion, step: 60, fmtY: v => `${Math.round(v / 60)} h`, series: [{ pts: ideal, color: 'var(--faint)', dash: true }, { pts: real, color: 'var(--ia)', real: true }], vacio: 'Aparece con tu primer registro del curso.' })}
+    ${leyenda([['var(--ia)', 'Real'], ['var(--faint)', 'Ideal', true]])}</div>`;
+  libros().filter(b => !b.bonus || paginaDe(b.id) > b.inicial).forEach(b => {
+    const x0 = addDays(b.inicio, -1);
+    const realL = [{ x: x0, y: b.inicial }, ...ordenadas().filter(s => s.p === 'lec' && s.libro === b.id && s.pagina != null).map(s => ({ x: s.fecha < x0 ? x0 : s.fecha, y: s.pagina }))];
+    const xMax = [b.meta, ...realL.map(p => p.x)].sort().pop();
+    html += `<div class="card"><h2>${esc(b.titulo)} <small>p. ${paginaDe(b.id)} de ${b.paginas}</small></h2>
+      ${lineChart({ titulo: `Páginas de ${b.titulo} contra la línea ideal`, xMin: x0, xMax, yMin: 0, yMax: b.paginas, series: [{ pts: [{ x: x0, y: b.inicial }, { x: b.meta, y: b.paginas }], color: 'var(--faint)', dash: true }, { pts: realL, color: 'var(--lec)', real: true }], vacio: H < b.inicio ? `Arranca el ${fCorta(b.inicio)}.` : 'Aparece con tu primer registro de este libro.' })}
+      ${leyenda([['var(--lec)', 'Real'], ['var(--faint)', 'Ideal', true]])}</div>`;
+  });
+  return html;
+}
+
+/* ---------- PLAN Y AJUSTES ---------- */
+function vistaPlan() {
+  const H = hoy(), actual = H <= CONFIG.sprintFin ? 'sprint' : 'normal', sel = state.plan || actual, S = semana(sel);
+  let html = `<div class="card"><h2>Semana tipo ${semanaEditada(sel) ? '<span class="echip">Editada</span>' : ''}</h2>
+    <div class="seg" style="margin-bottom:6px">${['sprint', 'normal'].map(k => `<button class="${k === sel ? 'on' : ''}" data-action="plan-sel" data-v="${k}">${CONFIG.semanas[k].nombre}</button>`).join('')}</div>
+    <div class="xs muted" style="margin:8px 0 4px">${esc(S.rango)}${actual === sel ? ' · la que usas ahora' : ''} · mínimo 1 hora diaria</div>
+    ${S.dias.map((d, i) => `<div class="li" style="align-items:flex-start;${actual === sel && dow(H) === i ? 'background:var(--surface2);border-radius:12px;padding-left:8px;padding-right:8px' : ''}"><span class="n">${DIAS_C[i]}</span><div class="grow">
+      ${d.items.map(it => `<div class="row" style="gap:8px;padding:2px 0"><i style="width:8px;height:8px;border-radius:50%;background:var(--${it.p});flex:none"></i><span class="small grow">${esc(it.t.replace('{libro}', 'tu libro').replace('{cultura}', 'tema de la quincena').replace('{finanzas}', 'tema actual'))}</span><span class="xs muted num">${it.min} min</span></div>`).join('')}
+      <div class="xs muted">${d.tipo === 'libre' ? 'Libre' : 'Estructurado'}</div></div></div>`).join('')}
+    <div class="row" style="margin-top:12px;gap:8px"><button class="btn sm" data-action="editar-semana" data-v="${sel}">Editar semana</button>${semanaEditada(sel) ? `<button class="btn sm ghost" data-action="restaurar-semana" data-v="${sel}">Restaurar</button>` : ''}</div></div>`;
+  const c = curso();
+  html += `<div class="card"><h2>Metas</h2>
+    <button class="menu" data-action="editar-curso"><div class="grow"><div class="t">Curso de Claude Code</div><div class="s">Duración ${fHM(c.duracion)} · meta ${fCorta(c.metaFinal)}</div></div><span class="chev">›</span></button>
+    <button class="menu" data-action="editar-capitulos"><div class="grow"><div class="t">Capítulos del curso</div><div class="s">${c.capitulos.length ? pl(c.capitulos.length, 'capítulo', 'capítulos') : 'Opcional: úsalos en lugar de los bloques'}</div></div><span class="chev">›</span></button>
+    ${libros().map(b => `<button class="menu" data-action="editar-libro" data-v="${b.id}"><div class="grow"><div class="t">${esc(b.titulo)}</div><div class="s">${b.paginas} p. · meta ${fCorta(b.meta)}${b.bonus ? ' · bonus' : ''}</div></div><span class="chev">›</span></button>`).join('')}
+    <button class="menu" data-action="ir-cultura"><div class="grow"><div class="t">Temas de cultura</div><div class="s">Nombres, checklists y temas extra</div></div><span class="chev">›</span></button>
+    <button class="menu" data-action="setup"><div class="grow"><div class="t">Datos del inicio</div><div class="s">${pendientes().length ? `Faltan: ${esc(pendientes().join(', '))}` : 'Completos'}</div></div><span class="chev">›</span></button></div>`;
+  html += `<div class="card"><h2>Reglas de ajuste</h2>
+    <details class="dt"><summary>Curso atrasado más de 1 bloque</summary><p class="small muted">El sábado y domingo se vuelven de curso hasta alcanzar.</p></details>
+    <details class="dt"><summary>Lectura atrasada más de 20 páginas</summary><p class="small muted">Martes y jueves la lectura sube a 30 min.</p></details>
+    <details class="dt"><summary>Menos de 5 de 7 días cumplidos</summary><p class="small muted">Se mantiene la meta, pero esa semana 30 min cuentan para la racha, para no romper el hábito.</p></details>
+    <details class="dt"><summary>Terminaste el curso antes del 9 oct</summary><p class="small muted">Los días que quedan del sprint pasan a lectura y cultura.</p></details></div>`;
+  return html;
+}
+function vistaRespaldo() {
+  const n = sesiones().length;
+  return `<div class="card"><h2>Respaldo</h2><p class="small muted" style="margin:0 0 14px">${pl(n, 'sesión registrada', 'sesiones registradas')}. Todo vive en este teléfono: exporta de vez en cuando.</p>
+      <button class="btn primary block" data-action="exportar">Descargar respaldo (JSON)</button>
+      ${navigator.share ? '<button class="btn block" style="margin-top:8px" data-action="compartir">Compartir respaldo</button>' : ''}</div>
+    <div class="card"><h2>Importar</h2><p class="small muted" style="margin:0 0 10px">Reemplaza todo lo de este teléfono por el respaldo.</p>
+      <label class="btn block" style="position:relative;overflow:hidden">Elegir archivo<input type="file" class="imp-file" accept="application/json,.json" style="position:absolute;inset:0;opacity:0"></label>
+      <textarea class="input" id="imp-txt" style="margin-top:10px;font-size:14px;font-family:ui-monospace,Menlo,monospace" placeholder="…o pega aquí el texto del respaldo"></textarea>
+      <button class="btn ghost block" style="margin-top:8px" data-action="importar-txt">Importar texto</button></div>
+    <div class="card"><h2>Reiniciar</h2><p class="small muted" style="margin:0 0 10px">Borra todos tus registros y ajustes. No se puede deshacer.</p><button class="btn ghost block" style="color:var(--bad-t)" data-action="reset-1">Reiniciar datos</button></div>`;
+}
+
+/* ---------- MODALES ---------- */
+function openModal(html) {
+  $('#modal').innerHTML = `<div class="backdrop" data-action="cerrar"></div><div class="sheet" role="dialog" aria-modal="true"><div class="grab"></div>${html}</div>`;
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() { $('#modal').innerHTML = ''; document.body.style.overflow = ''; state.reg = null; }
+const val = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+
+function modalSetup() {
+  const aj = ajustes().libros || {}, po = libro('poderes'), bo = libro('bonus'), dz = libro('dispenza'), c = curso();
+  openModal(`<h2>Antes de empezar</h2><p class="small muted" style="margin:0">Con esto calculo bien tus páginas por día. Si no lo tienes a la mano, dale "Después" y lo llenas en Más → Plan y ajustes.</p>
+    <div class="fs" style="${pv('lec')}"><div class="field"><span>${esc(po.titulo)}: ¿en qué página vas?</span><input class="input num" id="su-pod" type="number" inputmode="numeric" min="0" max="${po.paginas}" value="${(aj.poderes || {}).inicial ?? ''}" placeholder="0 si no lo has empezado"></div></div>
+    <div class="fs"><div class="field"><span>Libro corto (bonus, 77 p.)</span><input class="input" id="su-bt" value="${esc((aj.bonus || {}).titulo || '')}" placeholder="Título" autocomplete="off"></div>
+      <div class="grid2"><label class="field"><span>Autor</span><input class="input" id="su-ba" value="${esc((aj.bonus || {}).autor || '')}" placeholder="Autor" autocomplete="off"></label>
+      <label class="field"><span>Página actual</span><input class="input num" id="su-bp" type="number" inputmode="numeric" min="0" value="${(aj.bonus || {}).inicial ?? ''}" placeholder="0"></label></div></div>
+    <div class="fs"><div class="field"><span>${esc(dz.titulo)}: páginas de tu edición</span><input class="input num" id="su-dz" type="number" inputmode="numeric" min="1" value="${dz.paginas}"></div></div>
+    <div class="fs"><div class="field"><span>Capítulos del curso (opcional)</span><textarea class="input" id="su-caps" placeholder="Uno por línea: 2:40 Nombre del capítulo">${esc(c.capitulos.map(ch => `${fHM(ch.min)} ${ch.nombre}`).join('\n'))}</textarea></div></div>
+    <button class="btn primary block" style="margin-top:16px" data-action="setup-ok">${I.check} Listo</button>
+    <button class="btn ghost block" style="margin-top:8px" data-action="setup-luego">Después</button>`);
+}
+function parseCapitulos(txt) {
+  return txt.split('\n').map(l => l.trim()).filter(Boolean).map(l => {
+    const m = l.match(/(\d+:\d{2}(?::\d{2})?)/); if (!m) return null;
+    const nombre = l.replace(m[0], '').replace(/^[\s\-–—·:.]+|[\s\-–—·:.]+$/g, '') || 'Capítulo';
+    return { nombre, min: parseHM(m[0]) };
+  }).filter(x => x && x.min != null).sort((a, b) => a.min - b.min);
+}
+function modalCurso() {
+  const c = curso();
+  openModal(`<h2>Curso de Claude Code</h2>
+    <div class="grid2"><label class="field"><span>Duración (h:mm)</span><input class="input num" id="c-dur" value="${fHM(c.duracion)}" inputmode="numeric"></label>
+    <label class="field"><span>Avance inicial</span><input class="input num" id="c-av" value="${fHM(c.avance)}" inputmode="numeric"></label></div>
+    <div class="field"><span>Fecha meta de cada bloque</span>${c.bloques.map((b, i) => `<div class="row" style="margin-top:6px"><span class="small" style="width:70px">Bloque ${b.n}</span><input class="input" type="date" id="c-f${i}" value="${b.fecha}" style="min-height:44px;font-size:16px"></div>`).join('')}</div>
+    <button class="btn primary block" style="margin-top:16px" data-action="guardar-curso">Guardar</button>
+    ${ajustes().curso ? '<button class="btn ghost block" style="margin-top:8px" data-action="restaurar-curso">Restaurar original</button>' : ''}`);
+}
+function modalCapitulos() {
+  const c = curso();
+  openModal(`<h2>Capítulos del curso</h2><p class="small muted" style="margin:0">Si el video tiene capítulos, pégalos aquí (uno por línea, con su minuto de inicio). Se usan como checkpoints en lugar de los bloques.</p>
+    <textarea class="input" id="caps" style="margin-top:14px;min-height:200px" placeholder="2:40 Subagentes&#10;3:05 Hooks&#10;3:30 MCP">${esc(c.capitulos.map(ch => `${fHM(ch.min)} ${ch.nombre}`).join('\n'))}</textarea>
+    <button class="btn primary block" style="margin-top:16px" data-action="guardar-capitulos">Guardar</button>`);
+}
+function modalLibro(id) {
+  const b = libro(id);
+  openModal(`<h2>${esc(b.titulo)}</h2>
+    <label class="field"><span>Título</span><input class="input" id="l-t" value="${esc(b.titulo)}" autocomplete="off"></label>
+    <label class="field"><span>Autor</span><input class="input" id="l-a" value="${esc(b.autor)}" autocomplete="off"></label>
+    <div class="grid2"><label class="field"><span>Páginas totales</span><input class="input num" id="l-p" type="number" inputmode="numeric" value="${b.paginas}"></label>
+    <label class="field"><span>Página al empezar</span><input class="input num" id="l-i" type="number" inputmode="numeric" value="${b.inicial}"></label></div>
+    <div class="grid2"><label class="field"><span>Empieza</span><input class="input" id="l-s" type="date" value="${b.inicio}" style="font-size:16px"></label>
+    <label class="field"><span>Fecha meta</span><input class="input" id="l-m" type="date" value="${b.meta}" style="font-size:16px"></label></div>
+    <button class="btn primary block" style="margin-top:16px" data-action="guardar-libro" data-v="${id}">Guardar</button>`);
+}
+function modalCultura(id) {
+  const t = id ? temaCultura(id) : { nombre: '', titulo: '', platicar: '', checklist: ['', '', '', '', ''], extra: true };
+  openModal(`<h2>${id ? esc(t.nombre) : 'Nuevo tema'}</h2>${t.inicio ? `<div class="small muted">${fDia(t.inicio)} – ${fDia(t.fin)}</div>` : ''}
+    <label class="field"><span>Tema</span><input class="input" id="t-n" value="${esc(t.nombre)}" placeholder="Relojes" autocomplete="off"></label>
+    ${t.extra ? '' : `<label class="field"><span>Nombre de la quincena</span><input class="input" id="t-q" value="${esc(t.titulo)}" autocomplete="off"></label>`}
+    <label class="field"><span>Qué deberías poder platicar al final</span><textarea class="input" id="t-p" style="min-height:70px">${esc(t.platicar)}</textarea></label>
+    <label class="field"><span>Checklist (una por línea)</span><textarea class="input" id="t-c" style="min-height:150px">${esc(t.checklist.join('\n'))}</textarea></label>
+    <button class="btn primary block" style="margin-top:16px" data-action="guardar-cul" data-v="${id || ''}">Guardar</button>
+    ${id && t.extra ? `<button class="btn ghost block" style="margin-top:8px;color:var(--bad-t)" data-action="borrar-extra" data-v="${id}">Borrar tema</button>` : ''}
+    ${id && !t.extra && (ajustes().cultura || {})[id] ? `<button class="btn ghost block" style="margin-top:8px" data-action="restaurar-cul" data-v="${id}">Restaurar original</button>` : ''}`);
+}
+function modalSemana(id) {
+  state.ed = { id, dias: clone(semana(id).dias) };
+  openModal(`<h2>${esc(CONFIG.semanas[id].nombre)}</h2><p class="small muted" style="margin:0">Pilar, minutos y qué haces. En el texto puedes usar {libro}, {cultura} y {finanzas}.</p><div id="ed-body">${edSemanaBody()}</div>`);
+}
+function edSemanaBody() {
+  const opts = p => ['ia', 'fin', 'lec', 'cul', 'rev'].map(x => `<option value="${x}" ${x === p ? 'selected' : ''}>${PN[x]}</option>`).join('');
+  return state.ed.dias.map((d, i) => `<div class="edday"><div class="row between"><b>${DIAS[i]}</b><select class="input" data-ed="tipo" data-d="${i}" style="width:150px;min-height:40px;font-size:15px"><option value="estructurado" ${d.tipo === 'estructurado' ? 'selected' : ''}>Estructurado</option><option value="libre" ${d.tipo === 'libre' ? 'selected' : ''}>Libre</option></select></div>
+    ${d.items.map((it, j) => `<div class="edrow"><select class="input" data-ed="p" data-d="${i}" data-j="${j}">${opts(it.p)}</select><input class="input num" type="number" inputmode="numeric" data-ed="min" data-d="${i}" data-j="${j}" value="${it.min}"><input class="input" data-ed="t" data-d="${i}" data-j="${j}" value="${esc(it.t)}"><button class="del" data-action="ed-quitar" data-d="${i}" data-j="${j}" aria-label="Quitar">×</button></div>`).join('')}
+    <button class="link" data-action="ed-agregar" data-d="${i}">+ Actividad</button></div>`).join('') + `<button class="btn primary block" style="margin-top:16px" data-action="guardar-semana">Guardar semana</button>`;
+}
+function leerEditorSemana() {
+  document.querySelectorAll('[data-ed]').forEach(el => {
+    const d = +el.dataset.d, j = el.dataset.j != null ? +el.dataset.j : null, k = el.dataset.ed;
+    if (k === 'tipo') state.ed.dias[d].tipo = el.value;
+    else if (state.ed.dias[d].items[j]) state.ed.dias[d].items[j][k] = k === 'min' ? Math.max(5, parseInt(el.value, 10) || 0) : el.value;
+  });
+}
+function importar(texto) {
+  try { storage.importAll(JSON.parse(texto)); state.tab = 'hoy'; state.mas = null; render(); toast('Respaldo importado'); }
+  catch (e) { toast(e.message.includes('respaldo') ? e.message : 'Ese texto no es un respaldo válido', false); }
+}
+function archivoRespaldo() {
+  const blob = new Blob([JSON.stringify(storage.exportAll(), null, 2)], { type: 'application/json' });
+  return { blob, nombre: `aprendizaje-respaldo-${hoy()}.json` };
+}
+
+/* =====================================================================
+   ACCIONES
+   ===================================================================== */
+const ACTIONS = {
+  tab(d) { state.tab = d.v; if (d.v === 'mas') state.mas = null; state.sub = null; render(); window.scrollTo(0, 0); },
+  mas(d) { state.mas = d.v; render(); window.scrollTo(0, 0); },
+  atras() { state.mas = null; render(); },
+  ir(d) { state.tab = 'mas'; state.mas = d.v; render(); window.scrollTo(0, 0); },
+  'ir-cultura'() { state.tab = 'metas'; state.metas = 'cul'; render(); window.scrollTo(0, 0); },
+  metas(d) { state.metas = d.v; state.sub = null; render(); },
+  filtro(d) { state.filtro = d.v; state.sub = null; render(); },
+  'filtro-sub'(d) { state.sub = state.sub === d.v ? null : d.v; render(); },
+  'ver-cul'(d) { state.sub = state.sub === d.v ? null : d.v; render(); if (state.sub) window.scrollTo(0, 0); },
+  cerrar() { closeModal(); },
+
+  registrar(d) { abrirRegistro(d.v || null, d.libro ? { libro: d.libro } : {}); },
+  'reg-p'(d) { const r = state.reg, keep = { fecha: r.fecha, nota: r.nota }; state.reg = { ...nuevoReg(d.v), ...keep }; rerenderReg(); },
+  'reg-min'(d) { state.reg.min = +d.v; rerenderReg(); },
+  'reg-fecha'(d) { state.reg.fecha = d.v; rerenderReg(); },
+  'reg-check'(d) { const i = +d.v; state.reg.checks[i] = !state.reg.checks[i]; rerenderReg(); },
+  guardar() { guardarRegistro(); },
+  'borrar-ses'(d) {
+    if (!confirm('¿Borrar este registro?')) return;
+    storage.set('sesiones', sesiones().filter(s => s.id !== d.v));
+    const R = clone(repasoData()); delete R[d.v]; storage.set('repaso', R);
+    render(); toast('Borrado');
+  },
+  'cerrar-logro'() { $('#overlay').innerHTML = ''; },
+
+  'fin-hecho'(d) { const h = clone(finHechos()); if (h[d.v]) delete h[d.v]; else h[d.v] = hoy(); storage.set('finHechos', h); render(); if (h[d.v]) toast(`Tema ${d.v} de finanzas: hecho`); },
+  'cul-check'(d) {
+    const cc = clone(storage.get('culChecks', {})), arr = checksDe(d.v); arr[+d.i] = !arr[+d.i]; cc[d.v] = arr; storage.set('culChecks', cc); render();
+    if (arr.every(Boolean)) { toast('Checklist completa'); confeti(); }
+  },
+  manual(d) { const m = clone(manual()); m[d.v] = !m[d.v]; storage.set('manual', m); render(); },
+
+  repaso() { iniciarRepaso(); },
+  voltear() { if (!state.rep) return; state.rep.v = !state.rep.v; const f = document.querySelector('.flip'); if (f) f.classList.toggle('v', state.rep.v); const acts = document.querySelector('.rep-acts'); if (acts) acts.innerHTML = state.rep.v ? `<button class="btn" data-action="rep-otra">Repasar otra vez</button><button class="btn primary" data-action="rep-sabe">Ya me lo sé</button>` : `<button class="btn primary" style="grid-column:1/-1" data-action="voltear">Ver el dato</button>`; },
+  'rep-sabe'() { calificar(true); },
+  'rep-otra'() { calificar(false); },
+  'cerrar-repaso'() { state.rep = null; renderRepaso(); render(); },
+
+  revision() { modalRevision(); },
+  'rev-top'(d, el) {
+    const dd = datos().find(x => x.id === d.v); if (!dd) return;
+    const s = state.ed.top;
+    if (s.has(dd.texto)) s.delete(dd.texto); else { if (s.size >= 3) { toast('Máximo 3', false); return; } s.add(dd.texto); }
+    el.classList.toggle('on', s.has(dd.texto));
+  },
+  'guardar-revision'() {
+    const H = hoy(), l = lunesDe(H), otros = val('rev-otro').split('\n').map(x => x.trim()).filter(Boolean);
+    const revs = clone(storage.get('revisiones', {}));
+    revs[l] = { fecha: H, dias: cumplidos(l), estados: estadosSemana(), top: [...state.ed.top, ...otros].slice(0, 3), ajuste: val('rev-ajuste'), reglas: reglas().map(r => r.id) };
+    storage.set('revisiones', revs);
+    const chk = document.getElementById('rev-min');
+    const antes = minDia(H);
+    if (chk && chk.checked) storage.set('sesiones', [...sesiones(), { id: uid(), fecha: H, p: 'rev', min: 15, ts: Date.now() }]);
+    closeModal(); state.prevMin = antes; render(); toast('Revisión guardada');
+    if (antes < CONFIG.metaDiaria && minDia(H) >= CONFIG.metaDiaria) setTimeout(confeti, 450);
+  },
+
+  setup() { modalSetup(); },
+  'setup-ok'() {
+    const pod = val('su-pod'), bt = val('su-bt'), ba = val('su-ba'), bp = val('su-bp'), dz = parseInt(val('su-dz'), 10);
+    const aj = clone(ajustes()); aj.libros = aj.libros || {};
+    if (pod !== '') aj.libros.poderes = { ...(aj.libros.poderes || {}), inicial: clamp(parseInt(pod, 10) || 0, 0, libro('poderes').paginas) };
+    if (bt) aj.libros.bonus = { ...(aj.libros.bonus || {}), titulo: bt, autor: ba || 'Por definir', inicial: Math.max(0, parseInt(bp, 10) || 0) };
+    if (dz > 0) aj.libros.dispenza = { ...(aj.libros.dispenza || {}), paginas: dz, paginasOk: true };
+    const caps = parseCapitulos(val('su-caps')); if (caps.length) aj.curso = { ...(aj.curso || {}), capitulos: caps };
+    storage.set('ajustes', aj); storage.set('setup', 'hecho'); closeModal(); render();
+    toast(pendientes().length ? 'Guardado. Lo demás, cuando lo tengas.' : 'Listo, todo calculado');
+  },
+  'setup-luego'() { storage.set('setup', 'luego'); closeModal(); render(); },
+
+  'plan-sel'(d) { state.plan = d.v; render(); },
+  'editar-semana'(d) { modalSemana(d.v); },
+  'ed-agregar'(d) { leerEditorSemana(); state.ed.dias[+d.d].items.push({ p: 'lec', min: 15, t: 'Lectura: {libro}' }); $('#ed-body').innerHTML = edSemanaBody(); },
+  'ed-quitar'(d) { leerEditorSemana(); state.ed.dias[+d.d].items.splice(+d.j, 1); $('#ed-body').innerHTML = edSemanaBody(); },
+  'guardar-semana'() {
+    leerEditorSemana();
+    if (state.ed.dias.some(d => !d.items.length)) { toast('Cada día necesita al menos una actividad', false); return; }
+    setAjuste(['semanas', state.ed.id], state.ed.dias); closeModal(); render(); toast('Semana guardada');
+  },
+  'restaurar-semana'(d) { if (!confirm('¿Regresar a la semana original?')) return; setAjuste(['semanas', d.v], undefined); render(); },
+  'editar-curso'() { modalCurso(); },
+  'guardar-curso'() {
+    const dur = parseHM(val('c-dur')), av = parseHM(val('c-av'));
+    if (!dur || av == null || av >= dur) { toast('Revisa la duración y el avance (h:mm)', false); return; }
+    const fechas = curso().bloques.map((_, i) => val(`c-f${i}`)).map((f, i) => /^\d{4}-\d{2}-\d{2}$/.test(f) ? f : CONFIG.curso.bloques[i].fecha);
+    const aj = { ...(ajustes().curso || {}), duracion: dur, avance: av, fechas };
+    setAjuste(['curso'], aj); closeModal(); render(); toast('Curso actualizado');
+  },
+  'restaurar-curso'() { const caps = curso().capitulos; setAjuste(['curso'], caps.length ? { capitulos: caps } : undefined); closeModal(); render(); },
+  'editar-capitulos'() { modalCapitulos(); },
+  'guardar-capitulos'() { const caps = parseCapitulos(val('caps')); setAjuste(['curso', 'capitulos'], caps.length ? caps : undefined); closeModal(); render(); toast(caps.length ? pl(caps.length, 'capítulo guardado', 'capítulos guardados') : 'Usando bloques'); },
+  'editar-libro'(d) { modalLibro(d.v); },
+  'guardar-libro'(d) {
+    const p = parseInt(val('l-p'), 10), i = parseInt(val('l-i'), 10), s = val('l-s'), m = val('l-m');
+    if (!(p > 0) || isNaN(i) || i < 0 || i > p || !s || !m || m < s) { toast('Revisa páginas y fechas', false); return; }
+    const prev = (ajustes().libros || {})[d.v] || {};
+    setAjuste(['libros', d.v], { ...prev, titulo: val('l-t') || libro(d.v).titulo, autor: val('l-a') || 'Por definir', paginas: p, inicial: i, inicio: s, meta: m, ...(d.v === 'dispenza' ? { paginasOk: true } : {}) });
+    closeModal(); render(); toast('Libro actualizado');
+  },
+  'editar-cul'(d) { modalCultura(d.v); },
+  'guardar-cul'(d) {
+    const nombre = val('t-n'), lista = val('t-c').split('\n').map(x => x.trim()).filter(Boolean);
+    if (!nombre || !lista.length) { toast('Pon el tema y al menos un punto', false); return; }
+    const datosT = { nombre, platicar: val('t-p'), checklist: lista };
+    if (!d.v) { setAjuste(['extras'], [...(ajustes().extras || []), { id: 'x' + uid(), ...datosT }]); }
+    else if (temaCultura(d.v).extra) setAjuste(['extras'], (ajustes().extras || []).map(x => x.id === d.v ? { ...x, ...datosT } : x));
+    else setAjuste(['cultura', d.v], { ...datosT, titulo: val('t-q') || `Quincena: ${nombre.toLowerCase()}` });
+    closeModal(); render(); toast('Tema guardado');
+  },
+  'borrar-extra'(d) { if (!confirm('¿Borrar este tema?')) return; setAjuste(['extras'], (ajustes().extras || []).filter(x => x.id !== d.v)); closeModal(); render(); },
+  'restaurar-cul'(d) { setAjuste(['cultura', d.v], undefined); closeModal(); render(); },
+
+  exportar() {
+    const { blob, nombre } = archivoRespaldo(), a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = nombre; document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 800); toast('Respaldo descargado');
+  },
+  async compartir() {
+    const { blob, nombre } = archivoRespaldo();
+    try {
+      const file = new File([blob], nombre, { type: 'application/json' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) await navigator.share({ files: [file], title: 'Respaldo Aprendizaje' });
+      else await navigator.share({ title: 'Respaldo Aprendizaje', text: JSON.stringify(storage.exportAll()) });
+    } catch (e) { if (e.name !== 'AbortError') toast('No se pudo compartir', false); }
+  },
+  'importar-txt'() { const t = val('imp-txt'); if (!t) { toast('Pega el texto del respaldo', false); return; } if (confirm('Esto reemplaza todos tus datos. ¿Seguir?')) importar(t); },
+  'reset-1'() {
+    openModal(`<h2>¿Borrar todo?</h2><p class="muted">Se borran tus sesiones, datos para platicar, revisiones y ajustes. No se puede deshacer. Si quieres, descarga un respaldo antes.</p>
+      <button class="btn block" data-action="exportar">Descargar respaldo primero</button>
+      <button class="btn danger block" style="margin-top:8px" data-action="reset-2">Sí, borrar todo</button>
+      <button class="btn ghost block" style="margin-top:8px" data-action="cerrar">Cancelar</button>`);
+  },
+  'reset-2'() { storage.clear(); closeModal(); state.tab = 'hoy'; state.mas = null; render(); toast('Datos reiniciados'); setTimeout(modalSetup, 400); },
+};
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-action]');
+  if (!el || el.disabled) return;
+  const fn = ACTIONS[el.dataset.action];
+  if (fn) { e.preventDefault(); fn(el.dataset, el); }
+});
+function bind(e) {
+  const el = e.target;
+  if (el.dataset && el.dataset.bind && state.reg) {
+    state.reg[el.dataset.bind] = el.value;
+    el.classList.remove('err');
+    if (el.dataset.rerender && e.type === 'change') {
+      if (el.dataset.bind === 'cul') state.reg.checks = checksDe(el.value);
+      if (el.dataset.bind === 'libro') state.reg.pagina = '';
+      rerenderReg();
+    }
+  }
+}
+document.addEventListener('input', bind);
+document.addEventListener('change', e => {
+  bind(e);
+  if (e.target.matches('.imp-file')) {
+    const f = e.target.files && e.target.files[0]; if (!f) return;
+    const rd = new FileReader();
+    rd.onload = () => { if (confirm('Esto reemplaza todos tus datos. ¿Seguir?')) importar(String(rd.result)); e.target.value = ''; };
+    rd.readAsText(f);
+  }
+});
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (state.rep) { state.rep = null; renderRepaso(); render(); } else if ($('#overlay').innerHTML) $('#overlay').innerHTML = ''; else closeModal();
+});
+// Si la app queda abierta y cambia el día (o regresa del fondo), refresca.
+let ultimoDia = hoy();
+document.addEventListener('visibilitychange', () => { if (!document.hidden && hoy() !== ultimoDia) { ultimoDia = hoy(); if (!$('#modal').innerHTML) render(); } });
+
+(async function main() {
+  await storage.init();
+  if (fechaDebug) document.body.insertAdjacentHTML('beforeend', `<div class="debug">Fecha simulada: ${fechaDebug}</div>`);
+  render();
+  if (!storage.get('setup')) setTimeout(modalSetup, 350);
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+})();
+</script>
+</body>
+</html>

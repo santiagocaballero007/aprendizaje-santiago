@@ -1,0 +1,4 @@
+# Documentos de contexto con datos personales: no se publican
+*.md
+.claude/
+.DS_Store

@@ -1,0 +1,16 @@
+{
+  "name": "Aprendizaje Santiago",
+  "short_name": "Aprender",
+  "description": "Plan de aprendizaje: IA, finanzas, lectura y cultura (28 sep – 31 dic 2026)",
+  "lang": "es-MX",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F6F3EC",
+  "theme_color": "#F6F3EC",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
